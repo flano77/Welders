@@ -974,11 +974,16 @@ const BADGES = [
         explanation: "Use Zeller terminals for manual transactions — press the small X in the corner, enter site PIN 2002, then input prices directly."
       },
       {
-        type: "Multiple Choice",
-        q: "What's the IMPOS support phone number if the POS is playing up?",
-        options: ["1300 780 268", "1800 555 123", "0432 376 759", "1300 123 456"],
-        answer: 0,
-        explanation: "IMPOS Support: 1300 780 268. Call immediately if the POS is not operating correctly."
+        type: "Scenario",
+        q: "The POS system is down and a customer wants to pay. You switch to the Zeller terminal but it's in normal mode showing the Welders logo. What do you do?",
+        options: [
+          "Tell the customer you can only accept cash right now",
+          "Press the small X in the corner, enter site PIN 2002, then input the price manually",
+          "Restart the Zeller terminal and wait",
+          "Call the manager and ask them to process it"
+        ],
+        answer: 1,
+      explanation: "Press the small X in the corner of the screen, enter site PIN 2002, and you can manually input prices. To return to normal mode, press MODE then POS."
       },
       {
         type: "Multiple Choice",
