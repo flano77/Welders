@@ -27,203 +27,150 @@
   }
   .container { max-width: 480px; margin: 0 auto; padding: 16px; }
 
-  /* Header */
-  .header {
+  /* ===== LOGIN SCREEN ===== */
+  .login-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .login-overlay.hidden { display: none; }
+  .login-box {
+    width: 100%; max-width: 380px;
     text-align: center;
-    padding: 24px 0 16px;
   }
-  .header h1 {
-    font-size: 1.6em;
-    color: var(--accent);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  .login-box h1 { color: var(--accent); font-size: 1.6em; text-transform: uppercase; letter-spacing: 1px; }
+  .login-box .login-subtitle { color: var(--muted); font-size: 0.85em; margin: 6px 0 28px; }
+  .login-box .dog-icon { font-size: 3em; margin-bottom: 10px; }
+  .login-field {
+    width: 100%; padding: 14px 16px; margin-bottom: 12px;
+    background: var(--card); border: 2px solid transparent; border-radius: 12px;
+    color: var(--text); font-size: 1em;
+    outline: none; transition: border-color 0.2s;
   }
-  .header .subtitle {
-    color: var(--muted);
-    font-size: 0.85em;
-    margin-top: 4px;
+  .login-field:focus { border-color: var(--accent); }
+  .login-field::placeholder { color: var(--muted); }
+  .login-btn {
+    width: 100%; padding: 14px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #1a1a2e; font-size: 1.05em; font-weight: 700;
+    cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+    margin-top: 8px; transition: transform 0.2s;
+  }
+  .login-btn:active { transform: scale(0.97); }
+  .login-btn:disabled { opacity: 0.5; cursor: default; }
+  .login-error {
+    color: var(--red); font-size: 0.85em; margin-top: 12px;
+    min-height: 20px;
   }
 
-  /* Stats bar */
-  .stats-bar {
-    display: flex;
-    justify-content: space-around;
+  /* ===== TAB NAV ===== */
+  .tab-nav {
+    display: flex; gap: 0;
     background: var(--card);
     border-radius: 12px;
-    padding: 14px 8px;
-    margin: 12px 0;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .tab-btn {
+    flex: 1; padding: 12px 8px;
+    background: none; border: none;
+    color: var(--muted); font-size: 0.8em; font-weight: 600;
+    cursor: pointer; text-align: center;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    transition: all 0.2s;
+    border-bottom: 3px solid transparent;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); background: rgba(232,168,56,0.08); }
+  .tab-btn .tab-icon { display: block; font-size: 1.3em; margin-bottom: 2px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ===== HEADER ===== */
+  .header { text-align: center; padding: 20px 0 10px; }
+  .header h1 { font-size: 1.6em; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; }
+  .header .subtitle { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+  .header .welcome-name { color: var(--green); font-size: 0.9em; margin-top: 6px; font-weight: 600; }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    display: flex; justify-content: space-around;
+    background: var(--card); border-radius: 12px;
+    padding: 14px 8px; margin: 12px 0;
   }
   .stat { text-align: center; }
   .stat .val { font-size: 1.4em; font-weight: 700; color: var(--accent); }
   .stat .lbl { font-size: 0.7em; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-  /* Rank display */
-  .rank-display {
-    text-align: center;
-    padding: 8px;
-    margin-bottom: 12px;
-  }
-  .rank-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: var(--green);
-  }
-  .rank-progress {
-    height: 6px;
-    background: var(--card);
-    border-radius: 3px;
-    margin: 8px 40px;
-    overflow: hidden;
-  }
-  .rank-progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--green));
-    border-radius: 3px;
-    transition: width 0.5s ease;
-  }
+  /* ===== RANK ===== */
+  .rank-display { text-align: center; padding: 8px; margin-bottom: 12px; }
+  .rank-title { font-size: 1.1em; font-weight: 700; color: var(--green); }
+  .rank-progress { height: 6px; background: var(--card); border-radius: 3px; margin: 8px 40px; overflow: hidden; }
+  .rank-progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--green)); border-radius: 3px; transition: width 0.5s ease; }
 
-  /* Badge grid */
-  .badge-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 12px 0;
-  }
+  /* ===== BADGE GRID ===== */
+  .badge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
   .badge-card {
-    background: var(--card);
-    border-radius: 14px;
-    padding: 18px 14px;
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
+    background: var(--card); border-radius: 14px;
+    padding: 18px 14px; text-align: center;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    border: 2px solid transparent; position: relative; overflow: hidden;
   }
   .badge-card:active { transform: scale(0.96); }
   .badge-card.earned { border-color: var(--green); }
   .badge-card.earned::after {
-    content: '✓';
-    position: absolute;
-    top: 8px; right: 10px;
-    color: var(--green);
-    font-size: 1.1em;
-    font-weight: 700;
+    content: '\2713'; position: absolute; top: 8px; right: 10px;
+    color: var(--green); font-size: 1.1em; font-weight: 700;
   }
   .badge-icon { font-size: 2.2em; margin-bottom: 6px; }
   .badge-name { font-size: 0.85em; font-weight: 600; }
   .badge-score { font-size: 0.7em; color: var(--muted); margin-top: 4px; }
 
-  /* Challenge mode button */
+  /* ===== CHALLENGE BTN ===== */
   .challenge-btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
+    display: block; width: 100%; padding: 16px;
     background: linear-gradient(135deg, var(--accent2), var(--accent));
-    border: none;
-    border-radius: 14px;
-    color: #1a1a2e;
-    font-size: 1.05em;
-    font-weight: 700;
-    cursor: pointer;
-    margin: 12px 0;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    border: none; border-radius: 14px; color: #1a1a2e;
+    font-size: 1.05em; font-weight: 700; cursor: pointer;
+    margin: 12px 0; text-transform: uppercase; letter-spacing: 1px;
     transition: transform 0.2s;
   }
   .challenge-btn:active { transform: scale(0.97); }
   .challenge-btn .sub { font-size: 0.7em; font-weight: 400; text-transform: none; letter-spacing: 0; display: block; margin-top: 2px; }
 
-  /* Quiz screen */
+  /* ===== QUIZ SCREEN ===== */
   .quiz-screen { display: none; }
   .quiz-screen.active { display: block; }
   .home-screen.active { display: block; }
   .home-screen { display: none; }
 
-  .quiz-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 0;
-  }
-  .back-btn {
-    background: none;
-    border: none;
-    color: var(--accent);
-    font-size: 1.4em;
-    cursor: pointer;
-    padding: 4px 8px;
-  }
+  .quiz-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; }
+  .back-btn { background: none; border: none; color: var(--accent); font-size: 1.4em; cursor: pointer; padding: 4px 8px; }
   .quiz-badge-name { font-weight: 600; font-size: 0.95em; }
   .quiz-progress-text { font-size: 0.8em; color: var(--muted); }
 
-  .progress-bar {
-    height: 5px;
-    background: var(--card);
-    border-radius: 3px;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 3px;
-    transition: width 0.3s ease;
-  }
+  .progress-bar { height: 5px; background: var(--card); border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.3s ease; }
 
-  /* Streak display */
-  .streak-display {
-    text-align: center;
-    margin-bottom: 14px;
-    min-height: 28px;
-  }
-  .streak-display span {
-    background: var(--card);
-    padding: 4px 14px;
-    border-radius: 20px;
-    font-size: 0.8em;
-    color: var(--accent);
-    font-weight: 600;
-  }
-  .streak-display .hot {
-    background: linear-gradient(135deg, #e74c3c, #e8a838);
-    color: #fff;
-    animation: pulse 0.6s ease infinite alternate;
-  }
+  .streak-display { text-align: center; margin-bottom: 14px; min-height: 28px; }
+  .streak-display span { background: var(--card); padding: 4px 14px; border-radius: 20px; font-size: 0.8em; color: var(--accent); font-weight: 600; }
+  .streak-display .hot { background: linear-gradient(135deg, #e74c3c, #e8a838); color: #fff; animation: pulse 0.6s ease infinite alternate; }
   @keyframes pulse { to { transform: scale(1.05); } }
 
-  /* Question */
-  .question-text {
-    font-size: 1.05em;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    min-height: 60px;
-  }
+  .question-text { font-size: 1.05em; line-height: 1.5; margin-bottom: 20px; min-height: 60px; }
   .question-type-label {
-    display: inline-block;
-    font-size: 0.65em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--accent);
-    background: rgba(232,168,56,0.15);
-    padding: 3px 10px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    display: inline-block; font-size: 0.65em; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); background: rgba(232,168,56,0.15);
+    padding: 3px 10px; border-radius: 10px; margin-bottom: 10px;
   }
 
-  /* Answer options */
   .options { display: flex; flex-direction: column; gap: 10px; }
   .option-btn {
-    background: var(--card);
-    border: 2px solid transparent;
-    border-radius: 12px;
-    padding: 14px 16px;
-    color: var(--text);
-    font-size: 0.92em;
-    text-align: left;
-    cursor: pointer;
-    transition: all 0.2s;
-    line-height: 1.4;
+    background: var(--card); border: 2px solid transparent; border-radius: 12px;
+    padding: 14px 16px; color: var(--text); font-size: 0.92em;
+    text-align: left; cursor: pointer; transition: all 0.2s; line-height: 1.4;
   }
   .option-btn:active { transform: scale(0.98); }
   .option-btn.selected { border-color: var(--accent); }
@@ -231,54 +178,30 @@
   .option-btn.wrong { border-color: var(--red); background: rgba(231,76,60,0.15); }
   .option-btn:disabled { cursor: default; opacity: 0.85; }
 
-  /* Feedback */
-  .feedback {
-    margin-top: 16px;
-    padding: 14px;
-    border-radius: 12px;
-    font-size: 0.88em;
-    line-height: 1.5;
-    display: none;
-  }
+  .feedback { margin-top: 16px; padding: 14px; border-radius: 12px; font-size: 0.88em; line-height: 1.5; display: none; }
   .feedback.show { display: block; animation: slideUp 0.3s ease; }
   .feedback.correct-fb { background: rgba(78,204,163,0.12); border-left: 3px solid var(--green); }
   .feedback.wrong-fb { background: rgba(231,76,60,0.12); border-left: 3px solid var(--red); }
   @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
   .next-btn {
-    display: none;
-    width: 100%;
-    padding: 14px;
-    margin-top: 16px;
-    background: var(--accent);
-    border: none;
-    border-radius: 12px;
-    color: #1a1a2e;
-    font-size: 0.95em;
-    font-weight: 600;
-    cursor: pointer;
+    display: none; width: 100%; padding: 14px; margin-top: 16px;
+    background: var(--accent); border: none; border-radius: 12px;
+    color: #1a1a2e; font-size: 0.95em; font-weight: 600; cursor: pointer;
   }
   .next-btn.show { display: block; }
 
-  /* Results screen */
+  /* ===== RESULTS ===== */
   .results-screen { display: none; text-align: center; padding: 30px 0; }
   .results-screen.active { display: block; animation: slideUp 0.4s ease; }
   .results-icon { font-size: 4em; margin-bottom: 12px; }
   .results-title { font-size: 1.4em; font-weight: 700; margin-bottom: 8px; }
   .results-subtitle { color: var(--muted); margin-bottom: 20px; font-size: 0.9em; }
-  .results-score {
-    font-size: 2.5em;
-    font-weight: 800;
-    color: var(--accent);
-    margin: 16px 0;
-  }
+  .results-score { font-size: 2.5em; font-weight: 800; color: var(--accent); margin: 16px 0; }
   .results-detail { color: var(--muted); font-size: 0.85em; margin-bottom: 20px; }
   .badge-unlocked {
-    background: rgba(78,204,163,0.15);
-    border: 2px solid var(--green);
-    border-radius: 16px;
-    padding: 20px;
-    margin: 20px 0;
+    background: rgba(78,204,163,0.15); border: 2px solid var(--green);
+    border-radius: 16px; padding: 20px; margin: 20px 0;
     animation: pulse 0.8s ease 2;
   }
   .badge-unlocked .badge-icon { font-size: 3em; }
@@ -286,785 +209,680 @@
 
   .result-btns { display: flex; gap: 10px; margin-top: 20px; }
   .result-btns button {
-    flex: 1;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    font-size: 0.9em;
-    font-weight: 600;
-    cursor: pointer;
+    flex: 1; padding: 14px; border: none; border-radius: 12px;
+    font-size: 0.9em; font-weight: 600; cursor: pointer;
   }
   .btn-retry { background: var(--card); color: var(--text); }
   .btn-home { background: var(--accent); color: #1a1a2e; }
 
-  /* Reset link */
-  .reset-link {
-    text-align: center;
-    margin: 24px 0 12px;
-  }
-  .reset-link a {
-    color: var(--muted);
-    font-size: 0.75em;
-    text-decoration: none;
-    cursor: pointer;
-  }
+  .reset-link { text-align: center; margin: 24px 0 12px; }
 
-  /* Animations */
+  /* ===== LEADERBOARD ===== */
+  .lb-row {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card); border-radius: 12px;
+    padding: 14px 16px; margin-bottom: 8px;
+  }
+  .lb-row.me { border: 2px solid var(--accent); }
+  .lb-pos {
+    font-size: 1.2em; font-weight: 800; color: var(--accent);
+    min-width: 28px; text-align: center;
+  }
+  .lb-pos.gold { color: #ffd700; }
+  .lb-pos.silver { color: #c0c0c0; }
+  .lb-pos.bronze { color: #cd7f32; }
+  .lb-info { flex: 1; }
+  .lb-name { font-weight: 600; font-size: 0.95em; }
+  .lb-badges { font-size: 0.8em; color: var(--muted); margin-top: 2px; }
+  .lb-pts { font-size: 1.1em; font-weight: 700; color: var(--accent); }
+  .lb-empty { text-align: center; color: var(--muted); padding: 40px 16px; font-size: 0.9em; }
+
+  /* ===== ADMIN PANEL ===== */
+  .admin-section { margin-bottom: 24px; }
+  .admin-section h3 { color: var(--accent); font-size: 1em; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px; }
+  .admin-staff-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card); border-radius: 12px; padding: 12px 16px; margin-bottom: 8px;
+  }
+  .admin-staff-info { flex: 1; }
+  .admin-staff-name { font-weight: 600; font-size: 0.9em; }
+  .admin-staff-meta { font-size: 0.75em; color: var(--muted); margin-top: 2px; }
+  .admin-staff-actions { display: flex; gap: 6px; }
+  .admin-btn-sm {
+    padding: 6px 12px; border: none; border-radius: 8px;
+    font-size: 0.75em; font-weight: 600; cursor: pointer;
+  }
+  .admin-btn-sm:active { transform: scale(0.95); }
+  .admin-btn-sm.danger { background: var(--red); color: #fff; }
+  .admin-btn-sm.primary { background: var(--accent); color: #1a1a2e; }
+  .admin-btn-sm.secondary { background: var(--card); color: var(--text); border: 1px solid var(--muted); }
+
+  .admin-add-form {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    background: var(--card); border-radius: 12px; padding: 14px; margin-bottom: 16px;
+  }
+  .admin-add-form input {
+    flex: 1; min-width: 100px; padding: 10px 12px;
+    background: var(--bg); border: 2px solid transparent; border-radius: 8px;
+    color: var(--text); font-size: 0.9em; outline: none;
+  }
+  .admin-add-form input:focus { border-color: var(--accent); }
+  .admin-add-form input::placeholder { color: var(--muted); }
+  .admin-add-form label { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85em; cursor: pointer; padding: 0 8px; }
+  .admin-add-form button { padding: 10px 20px; }
+
+  .admin-progress-row {
+    background: var(--card); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+  }
+  .admin-progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .admin-progress-name { font-weight: 600; font-size: 0.9em; }
+  .admin-progress-pts { color: var(--accent); font-weight: 700; }
+  .admin-progress-badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .admin-badge-pill {
+    font-size: 0.7em; padding: 3px 8px; border-radius: 10px;
+    background: rgba(78,204,163,0.15); color: var(--green);
+  }
+  .admin-badge-pill.locked { background: rgba(136,153,170,0.1); color: var(--muted); }
+  .admin-progress-last { font-size: 0.7em; color: var(--muted); margin-top: 6px; }
+
+  .export-btn {
+    width: 100%; padding: 14px;
+    background: var(--card); border: 2px solid var(--accent);
+    border-radius: 12px; color: var(--accent);
+    font-size: 0.9em; font-weight: 600; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .export-btn:active { transform: scale(0.97); background: rgba(232,168,56,0.1); }
+
+  /* ===== POINTS POPUP ===== */
   .points-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    position: fixed; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 2em;
-    font-weight: 800;
-    color: var(--accent);
+    font-size: 2em; font-weight: 800; color: var(--accent);
     pointer-events: none;
     animation: pointsFly 0.8s ease forwards;
-    z-index: 100;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    z-index: 100; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
   @keyframes pointsFly {
     0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
     50% { opacity: 1; transform: translate(-50%, -70%) scale(1.2); }
     100% { opacity: 0; transform: translate(-50%, -90%) scale(1); }
   }
+
+  .loading-spinner { text-align: center; padding: 40px; color: var(--muted); }
+  .loading-spinner::after {
+    content: ''; display: block; width: 30px; height: 30px;
+    margin: 12px auto 0; border: 3px solid var(--card);
+    border-top-color: var(--accent); border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .logout-btn {
+    background: none; border: none; color: var(--muted);
+    font-size: 0.75em; cursor: pointer; padding: 8px 16px;
+  }
 </style>
 </head>
 <body>
 
+<!-- ===== LOGIN OVERLAY ===== -->
+<div id="loginOverlay" class="login-overlay">
+  <div class="login-box">
+    <div class="dog-icon">&#x1F415;</div>
+    <h1>The Welder's Dog</h1>
+    <div style="font-size:1.3em; font-weight:700; margin-top:4px; color:var(--text);">Staff Challenge</div>
+    <div class="login-subtitle">Log in with your first name and IMPOS number</div>
+    <input id="loginName" class="login-field" type="text" placeholder="First name" autocomplete="off" autocapitalize="words">
+    <input id="loginImpos" class="login-field" type="text" inputmode="numeric" placeholder="IMPOS number" autocomplete="off" maxlength="4">
+    <button id="loginBtn" class="login-btn" onclick="attemptLogin()">Log In</button>
+    <div id="loginError" class="login-error"></div>
+  </div>
+</div>
+
 <div class="container">
 
-  <!-- HOME SCREEN -->
-  <div id="homeScreen" class="home-screen active">
-    <div class="header">
-      <h1>🐕 The Welder's Dog</h1>
-      <div style="font-size:1.3em; font-weight:700; margin-top:4px;">Staff Challenge</div>
-      <div class="subtitle">How well do you know the Dog?</div>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat"><div class="val" id="totalPoints">0</div><div class="lbl">Points</div></div>
-      <div class="stat"><div class="val" id="badgesEarned">0/6</div><div class="lbl">Badges</div></div>
-      <div class="stat"><div class="val" id="bestStreak">0</div><div class="lbl">Best Streak</div></div>
-    </div>
-
-    <div class="rank-display">
-      <div class="rank-title" id="rankTitle">🧹 Glass Collector</div>
-      <div class="rank-progress"><div class="rank-progress-fill" id="rankFill" style="width:0%"></div></div>
-    </div>
-
-    <div class="badge-grid" id="badgeGrid"></div>
-
-    <button class="challenge-btn" onclick="startChallenge()">
-      ⚡ Random Challenge
-      <span class="sub">10 questions from across all topics</span>
+  <!-- ===== TAB NAVIGATION ===== -->
+  <div id="tabNav" class="tab-nav" style="display:none;">
+    <button class="tab-btn active" onclick="switchTab('home')" id="tabHome">
+      <span class="tab-icon">&#x1F3E0;</span> Home
     </button>
-
-    <div class="reset-link"><button onclick="resetProgress()" style="background:none;border:none;color:#8899aa;font-size:0.75em;cursor:pointer;padding:8px 16px;">Reset all progress</button></div>
+    <button class="tab-btn" onclick="switchTab('leaderboard')" id="tabLeaderboard">
+      <span class="tab-icon">&#x1F3C6;</span> Board
+    </button>
+    <button class="tab-btn" onclick="switchTab('admin')" id="tabAdmin" style="display:none;">
+      <span class="tab-icon">&#x2699;&#xFE0F;</span> Admin
+    </button>
   </div>
 
-  <!-- QUIZ SCREEN -->
-  <div id="quizScreen" class="quiz-screen">
-    <div class="quiz-header">
-      <button class="back-btn" onclick="goHome()">←</button>
-      <span class="quiz-badge-name" id="quizBadgeName"></span>
-      <span class="quiz-progress-text" id="quizProgressText"></span>
+  <!-- ===== HOME TAB ===== -->
+  <div id="homeTab" class="tab-content">
+    <div id="homeScreen" class="home-screen active">
+      <div class="header">
+        <h1>&#x1F415; The Welder's Dog</h1>
+        <div style="font-size:1.3em; font-weight:700; margin-top:4px;">Staff Challenge</div>
+        <div class="subtitle">How well do you know the Dog?</div>
+        <div class="welcome-name" id="welcomeName"></div>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat"><div class="val" id="totalPoints">0</div><div class="lbl">Points</div></div>
+        <div class="stat"><div class="val" id="badgesEarned">0/6</div><div class="lbl">Badges</div></div>
+        <div class="stat"><div class="val" id="bestStreak">0</div><div class="lbl">Best Streak</div></div>
+      </div>
+
+      <div class="rank-display">
+        <div class="rank-title" id="rankTitle">&#x1F9F9; Glass Collector</div>
+        <div class="rank-progress"><div class="rank-progress-fill" id="rankFill" style="width:0%"></div></div>
+      </div>
+
+      <div class="badge-grid" id="badgeGrid"></div>
+
+      <button class="challenge-btn" onclick="startChallenge()">
+        &#x26A1; Random Challenge
+        <span class="sub">10 questions from across all topics</span>
+      </button>
+
+      <div class="reset-link">
+        <button onclick="logout()" class="logout-btn">Log out</button>
+      </div>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="quizProgressBar"></div></div>
-    <div class="streak-display" id="streakDisplay"></div>
-    <div id="questionArea">
-      <div class="question-type-label" id="questionType"></div>
-      <div class="question-text" id="questionText"></div>
-      <div class="options" id="optionsArea"></div>
-      <div class="feedback" id="feedback"></div>
-      <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next →</button>
+
+    <!-- QUIZ SCREEN -->
+    <div id="quizScreen" class="quiz-screen">
+      <div class="quiz-header">
+        <button class="back-btn" onclick="goHome()">&#x2190;</button>
+        <span class="quiz-badge-name" id="quizBadgeName"></span>
+        <span class="quiz-progress-text" id="quizProgressText"></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="quizProgressBar"></div></div>
+      <div class="streak-display" id="streakDisplay"></div>
+      <div id="questionArea">
+        <div class="question-type-label" id="questionType"></div>
+        <div class="question-text" id="questionText"></div>
+        <div class="options" id="optionsArea"></div>
+        <div class="feedback" id="feedback"></div>
+        <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next &#x2192;</button>
+      </div>
     </div>
+
+    <!-- RESULTS SCREEN -->
+    <div id="resultsScreen" class="results-screen"></div>
   </div>
 
-  <!-- RESULTS SCREEN -->
-  <div id="resultsScreen" class="results-screen"></div>
+  <!-- ===== LEADERBOARD TAB ===== -->
+  <div id="leaderboardTab" class="tab-content">
+    <div style="text-align:center; padding: 16px 0 12px;">
+      <div style="font-size:1.6em; font-weight:700; color:var(--accent);">&#x1F3C6; Leaderboard</div>
+      <div style="color:var(--muted); font-size:0.85em; margin-top:4px;">Who knows the Dog best?</div>
+    </div>
+    <div id="leaderboardList"></div>
+  </div>
+
+  <!-- ===== ADMIN TAB ===== -->
+  <div id="adminTab" class="tab-content">
+    <div style="text-align:center; padding: 16px 0 12px;">
+      <div style="font-size:1.6em; font-weight:700; color:var(--accent);">&#x2699;&#xFE0F; Admin Panel</div>
+      <div style="color:var(--muted); font-size:0.85em; margin-top:4px;">Manage staff &amp; view progress</div>
+    </div>
+
+    <!-- Add Staff -->
+    <div class="admin-section">
+      <h3>Add Staff Member</h3>
+      <div class="admin-add-form">
+        <input id="addStaffName" type="text" placeholder="First name" autocomplete="off">
+        <input id="addStaffImpos" type="text" inputmode="numeric" placeholder="IMPOS #" autocomplete="off" maxlength="4">
+        <label><input type="checkbox" id="addStaffAdmin"> Admin</label>
+        <button class="admin-btn-sm primary" onclick="addStaff()">Add</button>
+      </div>
+    </div>
+
+    <!-- Staff List -->
+    <div class="admin-section">
+      <h3>Staff List</h3>
+      <div id="adminStaffList"></div>
+    </div>
+
+    <!-- Progress Reports -->
+    <div class="admin-section">
+      <h3>Progress Reports</h3>
+      <div id="adminProgressList"></div>
+    </div>
+
+    <!-- Export -->
+    <div class="admin-section">
+      <button class="export-btn" onclick="exportCSV()">&#x1F4E5; Export Progress as CSV</button>
+    </div>
+  </div>
 
 </div>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <script>
 // ============================================================
-// QUESTION DATA — Edit/expand this section to add content!
-// Each badge has: id, name, icon, questions[]
-// Each question: { type, q, options, answer (index), explanation }
-// To add a new badge: just add another object to this array.
+// FIREBASE CONFIG
 // ============================================================
+firebase.initializeApp({
+  apiKey: "AIzaSyBYBHVmbyUux_jiX71YYVLr5fqlPDwJ7io",
+  authDomain: "welders-dog-staff-challenge.firebaseapp.com",
+  databaseURL: "https://welders-dog-staff-challenge-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "welders-dog-staff-challenge",
+  storageBucket: "welders-dog-staff-challenge.firebasestorage.app",
+  messagingSenderId: "726121323121",
+  appId: "1:726121323121:web:59ecd167d38b2a90fdd9d0"
+});
+const db = firebase.database();
 
+// ============================================================
+// QUESTION DATA
+// ============================================================
 const BADGES = [
   {
-    id: "ice_cool",
-    name: "ICE Cool Legend",
-    icon: "🧊",
+    id: "ice_cool", name: "ICE Cool Legend", icon: "\u{1F9CA}",
     description: "Hospitality culture & guest experience",
     questions: [
-      {
-        type: "Multiple Choice",
-        q: "What does the 'I' in the ICE Cool Ethos stand for?",
-        options: ["Integrity", "Initiative", "Intelligence", "Instinct"],
-        answer: 1,
-        explanation: "Initiative — Don't wait to be told. See it, own it, do it."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What does the 'C' in ICE stand for?",
-        options: ["Cleanliness", "Connection", "Commitment", "Consistency"],
-        answer: 1,
-        explanation: "Connection — Genuine, human interaction with every guest."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What does the 'E' in ICE stand for?",
-        options: ["Excellence", "Energy", "Enjoyment", "Efficiency"],
-        answer: 2,
-        explanation: "Enjoyment — If we're enjoying ourselves, our guests will too."
-      },
-      {
-        type: "Scenario",
-        q: "A group walks in and you're mid-restock behind the bar. What's the best move?",
-        options: [
-          "Finish restocking first — they'll wait",
-          "Smile, make eye contact, say 'Hey folks, I'll be with you shortly'",
-          "Wave them towards a table and keep working",
-          "Pretend you didn't see them and hope someone else gets them"
-        ],
-        answer: 1,
-        explanation: "First impressions matter! A smile and quick acknowledgement within the first two minutes goes a long way."
-      },
-      {
-        type: "True or False",
-        q: "At The Welder's Dog, hospitality is an add-on to the job — a nice bonus on top of the real work.",
-        options: ["True", "False"],
-        answer: 1,
-        explanation: "False! Hospitality IS the job. It's not an add-on — everything we do is guided by the ICE Cool Ethos."
-      },
-      {
-        type: "Scenario",
-        q: "It's a quiet Tuesday arvo. No customers at the bar. What should you be doing?",
-        options: [
-          "Checking your phone — it's quiet after all",
-          "Standing behind the bar chatting with other staff",
-          "Clearing glasses, restocking, prepping garnishes, wiping benches",
-          "Taking a break out the back"
-        ],
-        answer: 2,
-        explanation: "Downtime isn't phone time! If it's quiet, there's always something to do — clear, restock, prep, tidy, or walk the floor with the EFTPOS machine."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the upselling target per transaction?",
-        options: ["$1 extra", "$2 extra", "$5 extra", "As much as possible"],
-        answer: 1,
-        explanation: "Roughly $2 extra per transaction through small, relevant suggestions. Upselling should feel natural and helpful, not pushy."
-      },
-      {
-        type: "Scenario",
-        q: "A customer asks about a beer you've never tried. What do you do?",
-        options: [
-          "Just say 'it's good' and move on",
-          "Say 'sorry, I haven't tried that one' and walk away",
-          "Admit you're not sure, find out, and come back to them with an answer",
-          "Make something up that sounds convincing"
-        ],
-        answer: 2,
-        explanation: "If you don't know something, that's okay — find out and come back to the customer. Never bluff it!"
-      },
-      {
-        type: "Multiple Choice",
-        q: "Guests notice everything about you. Which of these matters?",
-        options: [
-          "Your body language",
-          "Your tone of voice",
-          "Your focus and attitude",
-          "All of the above — even when you think nobody's watching"
-        ],
-        answer: 3,
-        explanation: "Stay on show! Guests pick up on your body language, tone, focus, and attitude. Even when you think no one's watching, someone is."
-      },
-      {
-        type: "Scenario",
-        q: "You notice a tap handle is sticky, there's a puddle on the floor near the bar, and the bin is nearly full. What's the right approach?",
-        options: [
-          "Wait for someone else to notice",
-          "Fix all three — clean the handle, mop the puddle, empty the bin",
-          "Just do the bin — the rest can wait",
-          "Tell the manager about it"
-        ],
-        answer: 1,
-        explanation: "Be proactive! If something's running low, broken, messy, or confusing — do something about it. Don't wait for it to become a problem."
-      }
+      { type: "Multiple Choice", q: "What does the 'I' in the ICE Cool Ethos stand for?", options: ["Integrity", "Initiative", "Intelligence", "Instinct"], answer: 1, explanation: "Initiative \u2014 Don't wait to be told. See it, own it, do it." },
+      { type: "Multiple Choice", q: "What does the 'C' in ICE stand for?", options: ["Cleanliness", "Connection", "Commitment", "Consistency"], answer: 1, explanation: "Connection \u2014 Genuine, human interaction with every guest." },
+      { type: "Multiple Choice", q: "What does the 'E' in ICE stand for?", options: ["Excellence", "Energy", "Enjoyment", "Efficiency"], answer: 2, explanation: "Enjoyment \u2014 If we're enjoying ourselves, our guests will too." },
+      { type: "Scenario", q: "A group walks in and you're mid-restock behind the bar. What's the best move?", options: ["Finish restocking first \u2014 they'll wait", "Smile, make eye contact, say 'Hey folks, I'll be with you shortly'", "Wave them towards a table and keep working", "Pretend you didn't see them and hope someone else gets them"], answer: 1, explanation: "First impressions matter! A smile and quick acknowledgement within the first two minutes goes a long way." },
+      { type: "True or False", q: "At The Welder's Dog, hospitality is an add-on to the job \u2014 a nice bonus on top of the real work.", options: ["True", "False"], answer: 1, explanation: "False! Hospitality IS the job. It's not an add-on \u2014 everything we do is guided by the ICE Cool Ethos." },
+      { type: "Scenario", q: "It's a quiet Tuesday arvo. No customers at the bar. What should you be doing?", options: ["Checking your phone \u2014 it's quiet after all", "Standing behind the bar chatting with other staff", "Clearing glasses, restocking, prepping garnishes, wiping benches", "Taking a break out the back"], answer: 2, explanation: "Downtime isn't phone time! If it's quiet, there's always something to do \u2014 clear, restock, prep, tidy, or walk the floor with the EFTPOS machine." },
+      { type: "Multiple Choice", q: "What's the upselling target per transaction?", options: ["$1 extra", "$2 extra", "$5 extra", "As much as possible"], answer: 1, explanation: "Roughly $2 extra per transaction through small, relevant suggestions." },
+      { type: "Scenario", q: "A customer asks about a beer you've never tried. What do you do?", options: ["Just say 'it's good' and move on", "Say 'sorry, I haven't tried that one' and walk away", "Admit you're not sure, find out, and come back to them with an answer", "Make something up that sounds convincing"], answer: 2, explanation: "If you don't know something, that's okay \u2014 find out and come back to the customer. Never bluff it!" },
+      { type: "Multiple Choice", q: "Guests notice everything about you. Which of these matters?", options: ["Your body language", "Your tone of voice", "Your focus and attitude", "All of the above \u2014 even when you think nobody's watching"], answer: 3, explanation: "Stay on show! Guests pick up on your body language, tone, focus, and attitude." },
+      { type: "Scenario", q: "You notice a tap handle is sticky, there's a puddle on the floor near the bar, and the bin is nearly full. What's the right approach?", options: ["Wait for someone else to notice", "Fix all three \u2014 clean the handle, mop the puddle, empty the bin", "Just do the bin \u2014 the rest can wait", "Tell the manager about it"], answer: 1, explanation: "Be proactive! If something's running low, broken, messy, or confusing \u2014 do something about it." }
     ]
   },
   {
-    id: "tap_master",
-    name: "Tap Master",
-    icon: "🍺",
+    id: "tap_master", name: "Tap Master", icon: "\u{1F37A}",
     description: "Beers, cocktails & food menu",
     questions: [
-      {
-        type: "Multiple Choice",
-        q: "What's the ABV of Welder's Dry Lager?",
-        options: ["3.5%", "4.5%", "5.2%", "4.0%"],
-        answer: 1,
-        explanation: "Welder's Dry Lager sits at 4.5% — a clean, crisp lager with light malt body and golden straw colour."
-      },
-      {
-        type: "Multiple Choice",
-        q: "Which beer is described as having flavours of 'mangos, pine and sticky resin'?",
-        options: ["Napoleon Complex", "Red IPA", "Westie IPA", "Piney Pale Ale"],
-        answer: 2,
-        explanation: "That's the Westie IPA 6.5% — a classic West Coast style with strong American hop flavours."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's unique about the Pea Blossom Lemonade?",
-        options: [
-          "It's brewed with actual peas",
-          "It's coloured purple with Pea Blossom flowers",
-          "It's non-alcoholic",
-          "It changes colour when you add ice"
-        ],
-        answer: 1,
-        explanation: "Pea Blossom Lemonade (4.3%) is an alcoholic lemonade coloured purple with Pea Blossom flowers, with a sweet tart finish."
-      },
-      {
-        type: "Scenario",
-        q: "A customer says 'I normally drink Carlton Draught — what would you recommend here?' What's your best pick?",
-        options: [
-          "Extra Stout — similar vibe",
-          "Welder's Dry Lager — clean and crisp, closest match",
-          "Westie IPA — it's our best seller",
-          "Berry Cream Sour — they should try something new"
-        ],
-        answer: 1,
-        explanation: "Welder's Dry Lager is the natural recommendation — clean, crisp, familiar style but with the Welders quality."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What spirit base is the Apple Pie cocktail made with?",
-        options: [
-          "Rum and apple schnapps",
-          "Vodka and apple juice",
-          "House blended spiced whiskey, caramel, tequila & fresh Granny Smith",
-          "Bourbon and cinnamon"
-        ],
-        answer: 2,
-        explanation: "The Apple Pie ($16) is house blended spiced whiskey, caramel, tequila and freshly juiced Granny Smith apples."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the most expensive cocktail on the menu and how much is it?",
-        options: [
-          "Cucumber Gimlet — $19",
-          "Barrel Aged Negroni — $20",
-          "Penicillin — $18",
-          "East 8 Hold Up — $18"
-        ],
-        answer: 1,
-        explanation: "The Barrel Aged Negroni at $20 — gin, campari, antica formula & punt e mes."
-      },
-      {
-        type: "Scenario",
-        q: "Someone orders a gin & tonic. What's your upsell move?",
-        options: [
-          "Ask if they'd like a double",
-          "Offer a local premium gin for $2 extra",
-          "Suggest they try a cocktail instead",
-          "Offer them some chips on the side"
-        ],
-        answer: 1,
-        explanation: "Offer a local premium gin for $2 extra — it's a natural, helpful suggestion that hits the upsell target perfectly."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the price of a Classic NY (Veg) pizza?",
-        options: ["$17.00", "$19.00", "$21.00", "$22.00"],
-        answer: 1,
-        explanation: "Classic NY (Veg) is $19.00 — whole milk block mozzarella, grated pecorino romano and fresh oregano."
-      },
-      {
-        type: "Multiple Choice",
-        q: "How much is the minimum order for chicken wings?",
-        options: ["5 wings for $8", "10 wings for $15", "6 wings for $12", "10 wings for $20"],
-        answer: 1,
-        explanation: "Minimum order is 10 wings for $15, with additional multiples of 10 for $10. Available in Buffalo Hot Sauce or Hickory & Smokey BBQ."
-      },
-      {
-        type: "Scenario",
-        q: "A customer is ordering a lemonade. What's a good non-alcoholic upsell?",
-        options: [
-          "A soft drink instead",
-          "A zero-alcohol Pea Blossom option",
-          "A water — it's free",
-          "Nothing — they clearly don't want alcohol"
-        ],
-        answer: 1,
-        explanation: "Suggest the zero-alcohol Pea Blossom option — it's an interesting alternative that still gives them something special."
-      }
+      { type: "Multiple Choice", q: "What's the ABV of Welder's Dry Lager?", options: ["3.5%", "4.5%", "5.2%", "4.0%"], answer: 1, explanation: "Welder's Dry Lager sits at 4.5% \u2014 a clean, crisp lager." },
+      { type: "Multiple Choice", q: "Which beer is described as having flavours of 'mangos, pine and sticky resin'?", options: ["Napoleon Complex", "Red IPA", "Westie IPA", "Piney Pale Ale"], answer: 2, explanation: "That's the Westie IPA 6.5% \u2014 a classic West Coast style." },
+      { type: "Multiple Choice", q: "What's unique about the Pea Blossom Lemonade?", options: ["It's brewed with actual peas", "It's coloured purple with Pea Blossom flowers", "It's non-alcoholic", "It changes colour when you add ice"], answer: 1, explanation: "Pea Blossom Lemonade (4.3%) is coloured purple with Pea Blossom flowers." },
+      { type: "Scenario", q: "A customer says 'I normally drink Carlton Draught \u2014 what would you recommend here?'", options: ["Extra Stout \u2014 similar vibe", "Welder's Dry Lager \u2014 clean and crisp, closest match", "Westie IPA \u2014 it's our best seller", "Berry Cream Sour \u2014 they should try something new"], answer: 1, explanation: "Welder's Dry Lager is the natural recommendation \u2014 clean, crisp, familiar style." },
+      { type: "Multiple Choice", q: "What spirit base is the Apple Pie cocktail made with?", options: ["Rum and apple schnapps", "Vodka and apple juice", "House blended spiced whiskey, caramel, tequila & fresh Granny Smith", "Bourbon and cinnamon"], answer: 2, explanation: "The Apple Pie ($16) is house blended spiced whiskey, caramel, tequila and freshly juiced Granny Smith apples." },
+      { type: "Multiple Choice", q: "What's the most expensive cocktail on the menu and how much is it?", options: ["Cucumber Gimlet \u2014 $19", "Barrel Aged Negroni \u2014 $20", "Penicillin \u2014 $18", "East 8 Hold Up \u2014 $18"], answer: 1, explanation: "The Barrel Aged Negroni at $20 \u2014 gin, campari, antica formula & punt e mes." },
+      { type: "Scenario", q: "Someone orders a gin & tonic. What's your upsell move?", options: ["Ask if they'd like a double", "Offer a local premium gin for $2 extra", "Suggest they try a cocktail instead", "Offer them some chips on the side"], answer: 1, explanation: "Offer a local premium gin for $2 extra \u2014 hits the upsell target perfectly." },
+      { type: "Multiple Choice", q: "What's the price of a Classic NY (Veg) pizza?", options: ["$17.00", "$19.00", "$21.00", "$22.00"], answer: 1, explanation: "Classic NY (Veg) is $19.00." },
+      { type: "Multiple Choice", q: "How much is the minimum order for chicken wings?", options: ["5 wings for $8", "10 wings for $15", "6 wings for $12", "10 wings for $20"], answer: 1, explanation: "Minimum order is 10 wings for $15." },
+      { type: "Scenario", q: "A customer is ordering a lemonade. What's a good non-alcoholic upsell?", options: ["A soft drink instead", "A zero-alcohol Pea Blossom option", "A water \u2014 it's free", "Nothing \u2014 they clearly don't want alcohol"], answer: 1, explanation: "Suggest the zero-alcohol Pea Blossom option \u2014 something special." }
     ]
   },
   {
-    id: "bar_boss",
-    name: "Bar Boss",
-    icon: "🍸",
+    id: "bar_boss", name: "Bar Boss", icon: "\u{1F378}",
     description: "Opening, closing, equipment & setup",
     questions: [
-      {
-        type: "Multiple Choice",
-        q: "How early should you arrive before your rostered start time?",
-        options: ["Right on time", "5–10 minutes early", "15–20 minutes early", "30 minutes early"],
-        answer: 1,
-        explanation: "5–10 minutes early. This gives you time to store personal items, check shift notes, review the diary, and prep for service."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the target time to have both venues at basic operational capability after opening?",
-        options: ["10 minutes", "5 minutes", "2–3 minutes", "15 minutes"],
-        answer: 2,
-        explanation: "2–3 minutes! Complete the first few 'Open' checklist items quickly so customers can be served from the listed open time."
-      },
-      {
-        type: "Multiple Choice",
-        q: "An Espresso Martini should be served in what glass?",
-        options: ["Pint glass", "Rocks glass", "Coupe glass", "Tall glass"],
-        answer: 2,
-        explanation: "Espresso Martinis go in a coupe glass. Know your glassware — it's part of the standard!"
-      },
-      {
-        type: "Multiple Choice",
-        q: "What glass does a Tap Spritz get served in?",
-        options: [
-          "Wine glass",
-          "Belgian beer glass or Large Coupe or Stemless wine glass",
-          "Pint glass",
-          "Rocks glass"
-        ],
-        answer: 1,
-        explanation: "Tap Spritz goes in a Belgian beer glass, Large Coupe, or Stemless wine glass."
-      },
-      {
-        type: "True or False",
-        q: "It's fine to serve a pint in a glass that's slightly warm — the beer will cool it down.",
-        options: ["True", "False"],
-        answer: 1,
-        explanation: "False! Schooners, middys and pints should ideally be chilled. Don't use glasses that are noticeably above room temperature."
-      },
-      {
-        type: "Multiple Choice",
-        q: "Before loading glasses into the glasswasher, what must you do?",
-        options: [
-          "Just put them straight in",
-          "Rinse them, removing straws and citrus into sink baskets",
-          "Soak them in hot water for 5 minutes",
-          "Wipe them with a cloth first"
-        ],
-        answer: 1,
-        explanation: "Rinse glasses before loading, and dispose of straws and citrus in sink baskets. Stack with enough spacing for water circulation."
-      },
-      {
-        type: "Scenario",
-        q: "You suspect the ice in the machine might be contaminated. What do you do?",
-        options: [
-          "Scoop from the bottom — it's probably fine",
-          "Discard the ice and sanitise the bin",
-          "Tell a customer to just have their drink without ice",
-          "Wait for the next shift to deal with it"
-        ],
-        answer: 1,
-        explanation: "If contamination is suspected, discard the ice and sanitise the bin. Ice scoops must be stored in the designated holder, never inside the bin."
-      },
-      {
-        type: "Multiple Choice",
-        q: "During the monthly ice machine clean, what do you do with the first batch of ice after restarting?",
-        options: [
-          "Serve it — it's fresh",
-          "Discard it",
-          "Use it for cleaning",
-          "Let it melt naturally"
-        ],
-        answer: 1,
-        explanation: "Always discard the first batch of ice after a clean to ensure no chemical residue makes it into drinks."
-      },
-      {
-        type: "Multiple Choice",
-        q: "How should beer line cleaning chemical look when it's flowing through the lines correctly?",
-        options: ["Clear", "Pink", "Blue", "Cloudy white"],
-        answer: 1,
-        explanation: "Pull the chemical through the lines until the tap pours pink — that's how you know the chemical has come through properly."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What time should you intentionally dim the lighting at the venue?",
-        options: ["8pm", "9pm", "10pm", "When it gets dark outside"],
-        answer: 1,
-        explanation: "At approximately 9pm, there should be an intentional shift to dim the lighting and signal a progression in the evening."
-      }
+      { type: "Multiple Choice", q: "How early should you arrive before your rostered start time?", options: ["Right on time", "5\u201310 minutes early", "15\u201320 minutes early", "30 minutes early"], answer: 1, explanation: "5\u201310 minutes early." },
+      { type: "Multiple Choice", q: "What's the target time to have both venues at basic operational capability after opening?", options: ["10 minutes", "5 minutes", "2\u20133 minutes", "15 minutes"], answer: 2, explanation: "2\u20133 minutes!" },
+      { type: "Multiple Choice", q: "An Espresso Martini should be served in what glass?", options: ["Pint glass", "Rocks glass", "Coupe glass", "Tall glass"], answer: 2, explanation: "Espresso Martinis go in a coupe glass." },
+      { type: "Multiple Choice", q: "What glass does a Tap Spritz get served in?", options: ["Wine glass", "Belgian beer glass or Large Coupe or Stemless wine glass", "Pint glass", "Rocks glass"], answer: 1, explanation: "Tap Spritz goes in a Belgian beer glass, Large Coupe, or Stemless wine glass." },
+      { type: "True or False", q: "It's fine to serve a pint in a glass that's slightly warm \u2014 the beer will cool it down.", options: ["True", "False"], answer: 1, explanation: "False! Glasses should ideally be chilled." },
+      { type: "Multiple Choice", q: "Before loading glasses into the glasswasher, what must you do?", options: ["Just put them straight in", "Rinse them, removing straws and citrus into sink baskets", "Soak them in hot water for 5 minutes", "Wipe them with a cloth first"], answer: 1, explanation: "Rinse glasses before loading, dispose of straws and citrus in sink baskets." },
+      { type: "Scenario", q: "You suspect the ice in the machine might be contaminated. What do you do?", options: ["Scoop from the bottom \u2014 it's probably fine", "Discard the ice and sanitise the bin", "Tell a customer to just have their drink without ice", "Wait for the next shift to deal with it"], answer: 1, explanation: "Discard the ice and sanitise the bin." },
+      { type: "Multiple Choice", q: "During the monthly ice machine clean, what do you do with the first batch of ice after restarting?", options: ["Serve it \u2014 it's fresh", "Discard it", "Use it for cleaning", "Let it melt naturally"], answer: 1, explanation: "Always discard the first batch after a clean." },
+      { type: "Multiple Choice", q: "How should beer line cleaning chemical look when it's flowing through the lines correctly?", options: ["Clear", "Pink", "Blue", "Cloudy white"], answer: 1, explanation: "Pull the chemical through until the tap pours pink." },
+      { type: "Multiple Choice", q: "What time should you intentionally dim the lighting at the venue?", options: ["8pm", "9pm", "10pm", "When it gets dark outside"], answer: 1, explanation: "At approximately 9pm." }
     ]
   },
   {
-    id: "event_pro",
-    name: "Event Pro",
-    icon: "🎤",
+    id: "event_pro", name: "Event Pro", icon: "\u{1F3A4}",
     description: "Trivia, musos, events & functions",
     questions: [
-      {
-        type: "Multiple Choice",
-        q: "What day is Raffle & Key Draw night at the bar?",
-        options: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        answer: 1,
-        explanation: "Tuesday! Raffles and key draw run 4:30–6:30pm with Happy Hour discounts auto-applied by IMPOS."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the major prize if someone opens the central green padlock during the key draw?",
-        options: [
-          "A case of beer",
-          "A $100 voucher",
-          "A $200 Pizza & Drinks package at the brewery",
-          "Free drinks for the night"
-        ],
-        answer: 2,
-        explanation: "The central green padlock wins a $200 Pizza & Drinks package at the brewery. The outer black padlocks win a case of beer each."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the consolation prize if no padlock is opened during the key draw?",
-        options: ["A voucher", "Nothing", "A tap beer", "A stubby holder"],
-        answer: 2,
-        explanation: "If no padlock is opened, the consolation prize is a tap beer — to be used that evening."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What night is Trivia at the bar?",
-        options: ["Monday", "Tuesday", "Wednesday", "Thursday"],
-        answer: 2,
-        explanation: "Wednesday night, 7–9pm. Questions come from the Trivialicious subscription service."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the first prize for trivia night?",
-        options: ["$50 voucher", "$100 voucher", "A case of beer", "Free pizza for the team"],
-        answer: 1,
-        explanation: "First place wins a $100 voucher. Other prizes are takeaway 4-packs (2 or 3 of these)."
-      },
-      {
-        type: "Multiple Choice",
-        q: "On Brewery Thursdays, what's the AYCE (All You Can Eat) price for adults?",
-        options: ["$15", "$20", "$25", "$30"],
-        answer: 1,
-        explanation: "$20 for adults. Kids pay their age (e.g. a 9-year-old pays $9). The exception is single pizza orders for Gluten Free."
-      },
-      {
-        type: "Scenario",
-        q: "You're serving AYCE Thursday and notice a table of 4 eating pizza, but only 2 have plates. What do you do?",
-        options: [
-          "Nothing — not your problem",
-          "Politely check if everyone at the table has paid, since plates indicate payment",
-          "Confront them aggressively",
-          "Take the pizza away"
-        ],
-        answer: 1,
-        explanation: "Be vigilant — plates indicate someone has paid for AYCE. Politely check in with the table to confirm everyone's sorted."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the weekday (Mon–Wed) booking fee for a private/exclusive function at the brewery?",
-        options: ["$200", "$500", "$750", "$1000"],
-        answer: 1,
-        explanation: "Midweek (Mon–Wed) is $500. Weekend (Sat–Sun) is $1,000. These fees cover staff, utilities, etc."
-      },
-      {
-        type: "Multiple Choice",
-        q: "Who is the Sound Tech and act curator you should call if something isn't working for Muso's Thursday?",
-        options: ["Ayla", "The manager on duty", "Brendan Mooney", "The band themselves"],
-        answer: 2,
-        explanation: "Brendan Mooney is the Sound Tech and act curator. Call him if something isn't working with the sound setup."
-      },
-      {
-        type: "Scenario",
-        q: "You're on a Thursday open shift at the bar. What physical setup should you do for the musos?",
-        options: [
-          "Nothing special — they set up themselves",
-          "Clear the band corner of tables/chairs to allow the act to set up",
-          "Move everything to the middle of the venue",
-          "Set up a full PA system"
-        ],
-        answer: 1,
-        explanation: "Clear the band corner of tables and chairs to allow the act to set up. The sound system is in the travel case near the performance corner."
-      }
+      { type: "Multiple Choice", q: "What day is Raffle & Key Draw night at the bar?", options: ["Monday", "Tuesday", "Wednesday", "Thursday"], answer: 1, explanation: "Tuesday! 4:30\u20136:30pm with Happy Hour discounts." },
+      { type: "Multiple Choice", q: "What's the major prize if someone opens the central green padlock during the key draw?", options: ["A case of beer", "A $100 voucher", "A $200 Pizza & Drinks package at the brewery", "Free drinks for the night"], answer: 2, explanation: "A $200 Pizza & Drinks package at the brewery." },
+      { type: "Multiple Choice", q: "What's the consolation prize if no padlock is opened during the key draw?", options: ["A voucher", "Nothing", "A tap beer", "A stubby holder"], answer: 2, explanation: "A tap beer \u2014 to be used that evening." },
+      { type: "Multiple Choice", q: "What night is Trivia at the bar?", options: ["Monday", "Tuesday", "Wednesday", "Thursday"], answer: 2, explanation: "Wednesday night, 7\u20139pm." },
+      { type: "Multiple Choice", q: "What's the first prize for trivia night?", options: ["$50 voucher", "$100 voucher", "A case of beer", "Free pizza for the team"], answer: 1, explanation: "First place wins a $100 voucher." },
+      { type: "Multiple Choice", q: "On Brewery Thursdays, what's the AYCE (All You Can Eat) price for adults?", options: ["$15", "$20", "$25", "$30"], answer: 1, explanation: "$20 for adults." },
+      { type: "Scenario", q: "You're serving AYCE Thursday and notice a table of 4 eating pizza, but only 2 have plates. What do you do?", options: ["Nothing \u2014 not your problem", "Politely check if everyone at the table has paid, since plates indicate payment", "Confront them aggressively", "Take the pizza away"], answer: 1, explanation: "Plates indicate payment. Politely check in with the table." },
+      { type: "Multiple Choice", q: "What's the weekday (Mon\u2013Wed) booking fee for a private/exclusive function at the brewery?", options: ["$200", "$500", "$750", "$1000"], answer: 1, explanation: "Midweek (Mon\u2013Wed) is $500." },
+      { type: "Multiple Choice", q: "Who is the Sound Tech and act curator you should call if something isn't working for Muso's Thursday?", options: ["Ayla", "The manager on duty", "Brendan Mooney", "The band themselves"], answer: 2, explanation: "Brendan Mooney is the Sound Tech and act curator." },
+      { type: "Scenario", q: "You're on a Thursday open shift at the bar. What physical setup should you do for the musos?", options: ["Nothing special \u2014 they set up themselves", "Clear the band corner of tables/chairs to allow the act to set up", "Move everything to the middle of the venue", "Set up a full PA system"], answer: 1, explanation: "Clear the band corner of tables and chairs." }
     ]
   },
   {
-    id: "safe_hands",
-    name: "Safe Hands",
-    icon: "🛡️",
+    id: "safe_hands", name: "Safe Hands", icon: "\u{1F6E1}\uFE0F",
     description: "RSA, safety & responsible service",
     questions: [
-      {
-        type: "True or False",
-        q: "You can keep a photo of your RSA on your phone — you don't need the physical card on shift.",
-        options: ["True", "False"],
-        answer: 0,
-        explanation: "True! A digital copy is fine, but you must have a copy of your RSA with you whenever you're on shift — digital or physical."
-      },
-      {
-        type: "Scenario",
-        q: "A customer is showing signs of intoxication — slurred speech, unsteady on their feet. What's the right call?",
-        options: [
-          "Give them one more drink — they seem okay",
-          "Refuse service and ask them to leave calmly and respectfully",
-          "Ignore it and let them sort themselves out",
-          "Cut them off but don't say anything"
-        ],
-        answer: 1,
-        explanation: "Refuse service and ask them to leave in a calm, respectful manner. If behaviour escalates, notify the duty manager immediately."
-      },
-      {
-        type: "Multiple Choice",
-        q: "A customer appears to be on a trajectory toward intoxication but isn't there yet. Which strategy is NOT recommended?",
-        options: [
-          "Suggesting water alongside their drinks",
-          "Encouraging food consumption",
-          "Topping up their drinks to keep them happy",
-          "Recommending lower alcohol or mid-strength options"
-        ],
-        answer: 2,
-        explanation: "Topping up drinks is a no-go — it actually encourages excessive drinking. Better strategies include suggesting water, food, or lower-strength options."
-      },
-      {
-        type: "Multiple Choice",
-        q: "Where is the Incident Register kept?",
-        options: [
-          "In the manager's office only",
-          "In the storeroom at both the bar and the brewery — a bound A4 booklet with a black cover",
-          "Behind the bar under the till",
-          "There isn't a physical register — it's all digital"
-        ],
-        answer: 1,
-        explanation: "The Incident Register is a bound A4 booklet with a black cover, located in the storeroom at both venues."
-      },
-      {
-        type: "Scenario",
-        q: "One person is buying large rounds repeatedly for a group. Some in the group are looking worse for wear. What do you do?",
-        options: [
-          "Keep serving — they're paying customers",
-          "Monitor the group, communicate concerns with staff/duty manager so the customer can be monitored collectively",
-          "Refuse to serve the buyer",
-          "Water down their drinks"
-        ],
-        answer: 1,
-        explanation: "Communicate concerns with other staff or the duty manager so the group can be monitored collectively. The goal is always to prevent intoxication before it becomes an issue."
-      },
-      {
-        type: "True or False",
-        q: "The staff discount of 30% can be used for purchases for your friends too.",
-        options: ["True", "False"],
-        answer: 1,
-        explanation: "False! The 30% staff discount is only for the direct staff member — not for friends. The discount essentially removes all profit margin from the product."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What should you do with open bottles of wine at closing time?",
-        options: [
-          "Pour them out",
-          "Write the date on them to track how long they've been open",
-          "Cork them and put them back without marking",
-          "Take them home"
-        ],
-        answer: 1,
-        explanation: "Write the date on open wine bottles at closing. This ensures they're still suitable for the next service — sparkling lasts until next day, whites/rosé 3–5 days, reds 3–5 days."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the general 'use within' timeframe for an opened bottle of red wine?",
-        options: ["Next day", "3–5 days", "1 week", "2–4 weeks"],
-        answer: 1,
-        explanation: "Red wine: 3–5 days. Same as white/rosé. Sparkling is next day (if sealed), and fortified wines like Port last 2–4 weeks."
-      },
-      {
-        type: "Scenario",
-        q: "You see a staff member checking their phone during a quiet period in service. What's the deal?",
-        options: [
-          "It's fine — it's quiet",
-          "It's not acceptable — phones stay away during service, and there's always something productive to do",
-          "Only okay if they're on break",
-          "Acceptable if no customers are at the bar"
-        ],
-        answer: 1,
-        explanation: "Phones stay away during service, full stop. If it's quiet, there's always something to do — clear, restock, prep, tidy, or get on the floor."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What stock rotation principle should be followed in the coolroom and fridges?",
-        options: ["LIFO — Last In, First Out", "FIFO — First In, First Out", "Whatever fits", "By brand"],
-        answer: 1,
-        explanation: "Always FIFO — First In, First Out. Rotate stock so older products are used first. Check expiry dates regularly and offer discounted sales to avoid wastage."
-      }
+      { type: "True or False", q: "You can keep a photo of your RSA on your phone \u2014 you don't need the physical card on shift.", options: ["True", "False"], answer: 0, explanation: "True! A digital copy is fine." },
+      { type: "Scenario", q: "A customer is showing signs of intoxication \u2014 slurred speech, unsteady on their feet. What's the right call?", options: ["Give them one more drink \u2014 they seem okay", "Refuse service and ask them to leave calmly and respectfully", "Ignore it and let them sort themselves out", "Cut them off but don't say anything"], answer: 1, explanation: "Refuse service and ask them to leave calmly." },
+      { type: "Multiple Choice", q: "A customer appears to be on a trajectory toward intoxication but isn't there yet. Which strategy is NOT recommended?", options: ["Suggesting water alongside their drinks", "Encouraging food consumption", "Topping up their drinks to keep them happy", "Recommending lower alcohol or mid-strength options"], answer: 2, explanation: "Topping up drinks is a no-go." },
+      { type: "Multiple Choice", q: "Where is the Incident Register kept?", options: ["In the manager's office only", "In the storeroom at both the bar and the brewery \u2014 a bound A4 booklet with a black cover", "Behind the bar under the till", "There isn't a physical register \u2014 it's all digital"], answer: 1, explanation: "A bound A4 booklet with a black cover, in the storeroom at both venues." },
+      { type: "Scenario", q: "One person is buying large rounds repeatedly for a group. Some in the group are looking worse for wear. What do you do?", options: ["Keep serving \u2014 they're paying customers", "Monitor the group, communicate concerns with staff/duty manager so the customer can be monitored collectively", "Refuse to serve the buyer", "Water down their drinks"], answer: 1, explanation: "Communicate concerns with other staff or the duty manager." },
+      { type: "True or False", q: "The staff discount of 30% can be used for purchases for your friends too.", options: ["True", "False"], answer: 1, explanation: "False! The 30% staff discount is only for the direct staff member." },
+      { type: "Multiple Choice", q: "What should you do with open bottles of wine at closing time?", options: ["Pour them out", "Write the date on them to track how long they've been open", "Cork them and put them back without marking", "Take them home"], answer: 1, explanation: "Write the date on open wine bottles at closing." },
+      { type: "Multiple Choice", q: "What's the general 'use within' timeframe for an opened bottle of red wine?", options: ["Next day", "3\u20135 days", "1 week", "2\u20134 weeks"], answer: 1, explanation: "Red wine: 3\u20135 days." },
+      { type: "Scenario", q: "You see a staff member checking their phone during a quiet period in service. What's the deal?", options: ["It's fine \u2014 it's quiet", "It's not acceptable \u2014 phones stay away during service, and there's always something productive to do", "Only okay if they're on break", "Acceptable if no customers are at the bar"], answer: 1, explanation: "Phones stay away during service, full stop." },
+      { type: "Multiple Choice", q: "What stock rotation principle should be followed in the coolroom and fridges?", options: ["LIFO \u2014 Last In, First Out", "FIFO \u2014 First In, First Out", "Whatever fits", "By brand"], answer: 1, explanation: "Always FIFO \u2014 First In, First Out." }
     ]
   },
   {
-    id: "pos_ninja",
-    name: "POS Ninja",
-    icon: "💳",
+    id: "pos_ninja", name: "POS Ninja", icon: "\u{1F4B3}",
     description: "POS, tabs, payments & systems",
     questions: [
-      {
-        type: "True or False",
-        q: "You can use any staff member's IMPOS login to process transactions — it doesn't matter whose credentials you use.",
-        options: ["True", "False"],
-        answer: 1,
-        explanation: "False! Always log in using your own individual IMPOS credentials. This ensures accurate stock and financial reporting."
-      },
-      {
-        type: "Multiple Choice",
-        q: "When placing a food order through the POS, what must be attached to every order?",
-        options: ["A table number", "A buzzer number", "The customer's name", "A receipt"],
-        answer: 1,
-        explanation: "A buzzer number! Use the OPEN FOOD button and type the buzzer number into the text field."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What should food modifications and additions always carry?",
-        options: [
-          "No extra charge",
-          "A minimum $2 charge",
-          "A $5 surcharge",
-          "Whatever the chef decides"
-        ],
-        answer: 1,
-        explanation: "Additions should always carry a minimum $2 charge via the price field. Non-standard modifications can be recorded via the OPEN FOOD button."
-      },
-      {
-        type: "Scenario",
-        q: "A customer wants to open a tab. What do you need from them?",
-        options: [
-          "Just their name is fine",
-          "A customer card, clear ID details, or pre-arranged details with management",
-          "Their phone number",
-          "Nothing — just open it"
-        ],
-        answer: 1,
-        explanation: "Tabs should only be opened with a customer card, clear ID details, or pre-arranged details and limits confirmed with management."
-      },
-      {
-        type: "Multiple Choice",
-        q: "A customer wants to split payment on their tab by amount. After opening the tab and pressing Pay/Finalise, what's the next step?",
-        options: [
-          "Press SPLIT EVENLY",
-          "Enter the amount the first person is paying",
-          "Ask the customer to use separate cards",
-          "Void the tab and start separate ones"
-        ],
-        answer: 1,
-        explanation: "Enter the amount the first person is paying, select payment type, and the remaining balance appears automatically. Repeat until the balance is $0."
-      },
-      {
-        type: "Multiple Choice",
-        q: "The POS system has gone down completely. What's your backup to keep taking payments?",
-        options: [
-          "Cash only",
-          "Close the venue until it's fixed",
-          "Use the Zeller terminal — press the small X, enter PIN 2002, and process manually",
-          "Call IMPOS support and wait"
-        ],
-        answer: 2,
-        explanation: "Use Zeller terminals for manual transactions — press the small X in the corner, enter site PIN 2002, then input prices directly."
-      },
-      {
-        type: "Scenario",
-        q: "The POS system is down and a customer wants to pay. You switch to the Zeller terminal but it's in normal mode showing the Welders logo. What do you do?",
-        options: [
-          "Tell the customer you can only accept cash right now",
-          "Press the small X in the corner, enter site PIN 2002, then input the price manually",
-          "Restart the Zeller terminal and wait",
-          "Call the manager and ask them to process it"
-        ],
-        answer: 1,
-      explanation: "Press the small X in the corner of the screen, enter site PIN 2002, and you can manually input prices. To return to normal mode, press MODE then POS."
-      },
-      {
-        type: "Multiple Choice",
-        q: "What's the float amount for each venue's till?",
-        options: ["$200", "$300", "$400", "$500"],
-        answer: 2,
-        explanation: "$400 float for each venue. Count both tills, subtract the float, and put the day's takings into the respective pencil cases."
-      },
-      {
-        type: "Scenario",
-        q: "A customer wants to redeem a gift certificate. How do you handle it?",
-        options: [
-          "Just take the certificate and give them free drinks",
-          "Set up a TAB with the certificate value as the limit, noting their name and 'Gift Certificate' in the description",
-          "Tell them to come back when a manager is on",
-          "Enter it as a discount on each individual drink"
-        ],
-        answer: 1,
-        explanation: "Set up a TAB with the gift certificate value as the limit. Put their name and 'Gift Certificate' in the description. Place the redeemed certificate in the till."
-      },
-      {
-        type: "Multiple Choice",
-        q: "When scanning a wall spirit, guest beer can, or wine bottle that's not in the system, what should you do?",
-        options: [
-          "Guess the price",
-          "Use 'Open Drink' and inform management so the item, barcode and pricing can be added",
-          "Tell the customer it's not available",
-          "Give it away for free"
-        ],
-        answer: 1,
-        explanation: "Use 'Open Drink' as a temporary measure, but always inform management so the item can be properly added to IMPOS with the correct barcode and pricing."
-      }
+      { type: "True or False", q: "You can use any staff member's IMPOS login to process transactions \u2014 it doesn't matter whose credentials you use.", options: ["True", "False"], answer: 1, explanation: "False! Always log in using your own individual IMPOS credentials." },
+      { type: "Multiple Choice", q: "When placing a food order through the POS, what must be attached to every order?", options: ["A table number", "A buzzer number", "The customer's name", "A receipt"], answer: 1, explanation: "A buzzer number!" },
+      { type: "Multiple Choice", q: "What should food modifications and additions always carry?", options: ["No extra charge", "A minimum $2 charge", "A $5 surcharge", "Whatever the chef decides"], answer: 1, explanation: "A minimum $2 charge via the price field." },
+      { type: "Scenario", q: "A customer wants to open a tab. What do you need from them?", options: ["Just their name is fine", "A customer card, clear ID details, or pre-arranged details with management", "Their phone number", "Nothing \u2014 just open it"], answer: 1, explanation: "A customer card, clear ID details, or pre-arranged details." },
+      { type: "Multiple Choice", q: "A customer wants to split payment on their tab by amount. After opening the tab and pressing Pay/Finalise, what's the next step?", options: ["Press SPLIT EVENLY", "Enter the amount the first person is paying", "Ask the customer to use separate cards", "Void the tab and start separate ones"], answer: 1, explanation: "Enter the amount the first person is paying." },
+      { type: "Multiple Choice", q: "The POS system has gone down completely. What's your backup to keep taking payments?", options: ["Cash only", "Close the venue until it's fixed", "Use the Zeller terminal \u2014 press the small X, enter PIN ####, and process manually", "Call IMPOS support and wait"], answer: 2, explanation: "Use Zeller terminals \u2014 press the small X, enter site PIN ####." },
+      { type: "Scenario", q: "The POS system is down and a customer wants to pay. You switch to the Zeller terminal but it's in normal mode showing the Welders logo. What do you do?", options: ["Tell the customer you can only accept cash right now", "Press the small X in the corner, enter site PIN ####, then input the price manually", "Restart the Zeller terminal and wait", "Call the manager and ask them to process it"], answer: 1, explanation: "Press the small X in the corner of the screen, enter site PIN ####, and you can manually input prices. To return to normal mode, press MODE then POS." },
+      { type: "Multiple Choice", q: "What's the float amount for each venue's till?", options: ["$200", "$300", "$400", "$500"], answer: 2, explanation: "$400 float for each venue." },
+      { type: "Scenario", q: "A customer wants to redeem a gift certificate. How do you handle it?", options: ["Just take the certificate and give them free drinks", "Set up a TAB with the certificate value as the limit, noting their name and 'Gift Certificate' in the description", "Tell them to come back when a manager is on", "Enter it as a discount on each individual drink"], answer: 1, explanation: "Set up a TAB with the certificate value as the limit." },
+      { type: "Multiple Choice", q: "When scanning a wall spirit, guest beer can, or wine bottle that's not in the system, what should you do?", options: ["Guess the price", "Use 'Open Drink' and inform management so the item, barcode and pricing can be added", "Tell the customer it's not available", "Give it away for free"], answer: 1, explanation: "Use 'Open Drink' and inform management." }
     ]
   }
 ];
 
-// ============================================================
-// RANK SYSTEM
-// ============================================================
 const RANKS = [
-  { title: "🧹 Glass Collector", minBadges: 0 },
-  { title: "🍺 Tap Cadet", minBadges: 1 },
-  { title: "🍸 Bartender", minBadges: 2 },
-  { title: "⭐ Senior Bartender", minBadges: 3 },
-  { title: "🔥 Shift Leader", minBadges: 4 },
-  { title: "👑 Venue Supervisor", minBadges: 5 },
-  { title: "🐕 Venue Legend", minBadges: 6 }
+  { title: "\u{1F9F9} Glass Collector", minBadges: 0 },
+  { title: "\u{1F37A} Tap Cadet", minBadges: 1 },
+  { title: "\u{1F378} Bartender", minBadges: 2 },
+  { title: "\u2B50 Senior Bartender", minBadges: 3 },
+  { title: "\u{1F525} Shift Leader", minBadges: 4 },
+  { title: "\u{1F451} Venue Supervisor", minBadges: 5 },
+  { title: "\u{1F415} Venue Legend", minBadges: 6 }
 ];
 
 // ============================================================
-// GAME STATE
+// STATE
 // ============================================================
-let state = loadState();
+let currentUser = null;
+let state = defaultState();
+let allStaff = {};
+let allProgress = {};
 
 function defaultState() {
-  return {
-    totalPoints: 0,
-    bestStreak: 0,
-    badges: {},
-    challengeHighScore: 0
-  };
+  return { totalPoints: 0, bestStreak: 0, badges: {}, challengeHighScore: 0 };
 }
 
-function loadState() {
-  try {
-    const saved = localStorage.getItem('welders_challenge');
-    if (saved) return JSON.parse(saved);
-  } catch(e) {}
-  return defaultState();
+// ============================================================
+// LOGIN
+// ============================================================
+function attemptLogin() {
+  const nameInput = document.getElementById('loginName').value.trim();
+  const imposInput = document.getElementById('loginImpos').value.trim();
+  const errorEl = document.getElementById('loginError');
+  const loginBtn = document.getElementById('loginBtn');
+
+  if (!nameInput || !imposInput) {
+    errorEl.textContent = 'Please enter both your name and IMPOS number.';
+    return;
+  }
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = 'Checking...';
+  errorEl.textContent = '';
+
+  db.ref('staff').once('value').then(snap => {
+    const staffData = snap.val() || {};
+    const imposKey = imposInput.padStart(2, '0');
+    const staffRecord = staffData[imposKey];
+
+    if (!staffRecord) {
+      errorEl.textContent = "IMPOS number not found. Check with your manager.";
+      loginBtn.disabled = false;
+      loginBtn.textContent = 'Log In';
+      return;
+    }
+
+    if (staffRecord.name.toLowerCase() !== nameInput.toLowerCase()) {
+      errorEl.textContent = "Name doesn't match that IMPOS number. Try again.";
+      loginBtn.disabled = false;
+      loginBtn.textContent = 'Log In';
+      return;
+    }
+
+    currentUser = { name: staffRecord.name, impos: imposKey, admin: !!staffRecord.admin };
+    localStorage.setItem('welders_user', JSON.stringify({ name: currentUser.name, impos: currentUser.impos }));
+
+    loadUserProgress().then(() => showApp());
+  }).catch(err => {
+    console.error('Login error:', err);
+    errorEl.textContent = 'Connection error. Check your internet and try again.';
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Log In';
+  });
+}
+
+function loadUserProgress() {
+  return db.ref('progress/' + currentUser.impos).once('value').then(snap => {
+    const data = snap.val();
+    if (data) {
+      state = {
+        totalPoints: data.totalPoints || 0,
+        bestStreak: data.bestStreak || 0,
+        badges: data.badges || {},
+        challengeHighScore: data.challengeHighScore || 0
+      };
+    } else {
+      state = defaultState();
+    }
+  });
 }
 
 function saveState() {
-  try { localStorage.setItem('welders_challenge', JSON.stringify(state)); } catch(e) {}
+  if (!currentUser) return;
+  db.ref('progress/' + currentUser.impos).set({
+    totalPoints: state.totalPoints,
+    bestStreak: state.bestStreak,
+    badges: state.badges,
+    challengeHighScore: state.challengeHighScore,
+    lastActive: firebase.database.ServerValue.TIMESTAMP,
+    name: currentUser.name
+  });
 }
 
-function resetProgress() {
-  if (confirm("Reset all your progress? This can't be undone!")) {
-    state = defaultState();
-    saveState();
+function showApp() {
+  document.getElementById('loginOverlay').classList.add('hidden');
+  document.getElementById('tabNav').style.display = 'flex';
+  if (currentUser.admin) document.getElementById('tabAdmin').style.display = '';
+  document.getElementById('welcomeName').textContent = 'Welcome, ' + currentUser.name + '!';
+  document.getElementById('homeTab').classList.add('active');
+  renderHome();
+  loadLeaderboard();
+  if (currentUser.admin) loadAdminData();
+}
+
+function logout() {
+  currentUser = null;
+  state = defaultState();
+  localStorage.removeItem('welders_user');
+  document.getElementById('loginOverlay').classList.remove('hidden');
+  document.getElementById('tabNav').style.display = 'none';
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('loginName').value = '';
+  document.getElementById('loginImpos').value = '';
+  document.getElementById('loginError').textContent = '';
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('loginBtn').textContent = 'Log In';
+  document.getElementById('quizScreen').classList.remove('active');
+  document.getElementById('resultsScreen').classList.remove('active');
+  document.getElementById('homeScreen').classList.add('active');
+}
+
+function tryAutoLogin() {
+  try {
+    const saved = localStorage.getItem('welders_user');
+    if (!saved) return;
+    const { name, impos } = JSON.parse(saved);
+    if (!name || !impos) return;
+    db.ref('staff/' + impos).once('value').then(snap => {
+      const record = snap.val();
+      if (record && record.name.toLowerCase() === name.toLowerCase()) {
+        currentUser = { name: record.name, impos: impos, admin: !!record.admin };
+        loadUserProgress().then(() => showApp());
+      }
+    });
+  } catch(e) {}
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1)).classList.add('active');
+  document.getElementById(tabName + 'Tab').classList.add('active');
+  if (tabName === 'home') {
+    document.getElementById('quizScreen').classList.remove('active');
+    document.getElementById('resultsScreen').classList.remove('active');
+    document.getElementById('homeScreen').classList.add('active');
     renderHome();
   }
+  if (tabName === 'leaderboard') loadLeaderboard();
+  if (tabName === 'admin' && currentUser && currentUser.admin) loadAdminData();
+}
+
+// ============================================================
+// LEADERBOARD
+// ============================================================
+function loadLeaderboard() {
+  db.ref('progress').once('value').then(snap => {
+    const data = snap.val() || {};
+    const entries = [];
+    Object.keys(data).forEach(impos => {
+      const p = data[impos];
+      const badgeIcons = [];
+      if (p.badges) BADGES.forEach(b => { if (p.badges[b.id]) badgeIcons.push(b.icon); });
+      entries.push({
+        name: p.name || impos, impos: impos,
+        points: p.totalPoints || 0,
+        badgeCount: p.badges ? Object.keys(p.badges).length : 0,
+        badgeIcons: badgeIcons
+      });
+    });
+    entries.sort((a, b) => b.points - a.points || b.badgeCount - a.badgeCount);
+
+    const listEl = document.getElementById('leaderboardList');
+    if (entries.length === 0) {
+      listEl.innerHTML = '<div class="lb-empty">No one has started yet. Be the first!</div>';
+      return;
+    }
+    let html = '';
+    entries.forEach((e, i) => {
+      const pos = i + 1;
+      const posClass = pos === 1 ? 'gold' : pos === 2 ? 'silver' : pos === 3 ? 'bronze' : '';
+      const isMe = currentUser && e.impos === currentUser.impos;
+      html += '<div class="lb-row' + (isMe ? ' me' : '') + '">';
+      html += '<div class="lb-pos ' + posClass + '">' + pos + '</div>';
+      html += '<div class="lb-info"><div class="lb-name">' + e.name + (isMe ? ' (you)' : '') + '</div>';
+      html += '<div class="lb-badges">' + (e.badgeIcons.length > 0 ? e.badgeIcons.join(' ') : 'No badges yet') + '</div></div>';
+      html += '<div class="lb-pts">' + e.points + '</div></div>';
+    });
+    listEl.innerHTML = html;
+  });
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+function loadAdminData() {
+  db.ref('staff').once('value').then(snap => { allStaff = snap.val() || {}; renderAdminStaffList(); });
+  db.ref('progress').once('value').then(snap => { allProgress = snap.val() || {}; renderAdminProgress(); });
+}
+
+function renderAdminStaffList() {
+  const listEl = document.getElementById('adminStaffList');
+  const keys = Object.keys(allStaff).sort((a, b) => allStaff[a].name.localeCompare(allStaff[b].name));
+  if (keys.length === 0) { listEl.innerHTML = '<div class="lb-empty">No staff members yet.</div>'; return; }
+  let html = '';
+  keys.forEach(impos => {
+    const s = allStaff[impos];
+    html += '<div class="admin-staff-row"><div class="admin-staff-info">';
+    html += '<div class="admin-staff-name">' + s.name + (s.admin ? ' <span style="color:var(--accent);font-size:0.75em;">ADMIN</span>' : '') + '</div>';
+    html += '<div class="admin-staff-meta">IMPOS: ' + impos + '</div></div>';
+    html += '<div class="admin-staff-actions">';
+    html += s.admin
+      ? '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',false)">Remove Admin</button>'
+      : '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',true)">Make Admin</button>';
+    html += '<button class="admin-btn-sm danger" onclick="removeStaff(\'' + impos + '\')">Remove</button>';
+    html += '</div></div>';
+  });
+  listEl.innerHTML = html;
+}
+
+function renderAdminProgress() {
+  const listEl = document.getElementById('adminProgressList');
+  const entries = [];
+  Object.keys(allStaff).forEach(impos => {
+    const s = allStaff[impos];
+    const p = allProgress[impos] || {};
+    entries.push({
+      name: s.name, impos: impos,
+      points: p.totalPoints || 0,
+      badges: p.badges || {},
+      lastActive: p.lastActive || 0
+    });
+  });
+  entries.sort((a, b) => b.points - a.points);
+  if (entries.length === 0) { listEl.innerHTML = '<div class="lb-empty">No data yet.</div>'; return; }
+  let html = '';
+  entries.forEach(e => {
+    const lastDate = e.lastActive ? new Date(e.lastActive).toLocaleDateString('en-AU') : 'Never';
+    html += '<div class="admin-progress-row"><div class="admin-progress-header">';
+    html += '<div class="admin-progress-name">' + e.name + ' <span style="color:var(--muted);font-size:0.75em;">(#' + e.impos + ')</span></div>';
+    html += '<div class="admin-progress-pts">' + e.points + ' pts</div></div>';
+    html += '<div class="admin-progress-badges">';
+    BADGES.forEach(b => {
+      const earned = !!e.badges[b.id];
+      html += '<span class="admin-badge-pill' + (earned ? '' : ' locked') + '">' + b.icon + ' ' + (earned ? 'Earned' : 'Locked') + '</span>';
+    });
+    html += '</div><div class="admin-progress-last">Last active: ' + lastDate + '</div></div>';
+  });
+  listEl.innerHTML = html;
+}
+
+function addStaff() {
+  const name = document.getElementById('addStaffName').value.trim();
+  const impos = document.getElementById('addStaffImpos').value.trim().padStart(2, '0');
+  const isAdmin = document.getElementById('addStaffAdmin').checked;
+  if (!name || !impos || impos === '00') { alert('Please enter a valid name and IMPOS number.'); return; }
+  db.ref('staff/' + impos).set({ name: name, impos: impos, admin: isAdmin }).then(() => {
+    document.getElementById('addStaffName').value = '';
+    document.getElementById('addStaffImpos').value = '';
+    document.getElementById('addStaffAdmin').checked = false;
+    loadAdminData();
+  });
+}
+
+function removeStaff(impos) {
+  const s = allStaff[impos];
+  if (!s) return;
+  if (!confirm('Remove ' + s.name + ' (#' + impos + ') and all their progress?')) return;
+  const updates = {};
+  updates['staff/' + impos] = null;
+  updates['progress/' + impos] = null;
+  db.ref().update(updates).then(() => loadAdminData());
+}
+
+function toggleAdmin(impos, makeAdmin) {
+  db.ref('staff/' + impos + '/admin').set(makeAdmin).then(() => loadAdminData());
+}
+
+function exportCSV() {
+  const rows = [['Name', 'IMPOS', 'Points', 'Badges Earned', 'Badges List', 'Best Streak', 'Last Active']];
+  Object.keys(allStaff).forEach(impos => {
+    const s = allStaff[impos];
+    const p = allProgress[impos] || {};
+    const badgeCount = p.badges ? Object.keys(p.badges).length : 0;
+    const badgeList = p.badges ? BADGES.filter(b => p.badges[b.id]).map(b => b.name).join('; ') : '';
+    const lastDate = p.lastActive ? new Date(p.lastActive).toLocaleDateString('en-AU') : 'Never';
+    rows.push([s.name, impos, p.totalPoints || 0, badgeCount + '/6', badgeList, p.bestStreak || 0, lastDate]);
+  });
+  let csv = rows.map(r => r.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\n');
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'staff_challenge_progress_' + new Date().toISOString().slice(0, 10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 // ============================================================
@@ -1075,42 +893,21 @@ let currentQuiz = null;
 function startBadgeQuiz(badgeId) {
   const badge = BADGES.find(b => b.id === badgeId);
   if (!badge) return;
-
-  const shuffled = shuffleArray([...badge.questions]);
   currentQuiz = {
-    badgeId: badge.id,
-    badgeName: badge.name,
-    badgeIcon: badge.icon,
-    questions: shuffled,
-    currentIndex: 0,
-    score: 0,
-    streak: 0,
-    maxStreak: 0,
-    points: 0,
-    isChallenge: false
+    badgeId: badge.id, badgeName: badge.name, badgeIcon: badge.icon,
+    questions: shuffleArray([...badge.questions]),
+    currentIndex: 0, score: 0, streak: 0, maxStreak: 0, points: 0, isChallenge: false
   };
   showQuizScreen();
 }
 
 function startChallenge() {
   const allQs = [];
-  BADGES.forEach(b => {
-    b.questions.forEach(q => {
-      allQs.push({ ...q, _badge: b.name });
-    });
-  });
-  const shuffled = shuffleArray(allQs).slice(0, 10);
+  BADGES.forEach(b => b.questions.forEach(q => allQs.push({ ...q, _badge: b.name })));
   currentQuiz = {
-    badgeId: null,
-    badgeName: "Random Challenge",
-    badgeIcon: "⚡",
-    questions: shuffled,
-    currentIndex: 0,
-    score: 0,
-    streak: 0,
-    maxStreak: 0,
-    points: 0,
-    isChallenge: true
+    badgeId: null, badgeName: "Random Challenge", badgeIcon: "\u26A1",
+    questions: shuffleArray(allQs).slice(0, 10),
+    currentIndex: 0, score: 0, streak: 0, maxStreak: 0, points: 0, isChallenge: true
   };
   showQuizScreen();
 }
@@ -1127,19 +924,13 @@ function renderQuestion() {
   const quiz = currentQuiz;
   const q = quiz.questions[quiz.currentIndex];
   const total = quiz.questions.length;
-
   document.getElementById('quizProgressText').textContent = (quiz.currentIndex + 1) + '/' + total;
   document.getElementById('quizProgressBar').style.width = ((quiz.currentIndex / total) * 100) + '%';
 
-  // Streak
   const streakEl = document.getElementById('streakDisplay');
-  if (quiz.streak >= 3) {
-    streakEl.innerHTML = '<span class="hot">🔥 ' + quiz.streak + ' streak!</span>';
-  } else if (quiz.streak > 0) {
-    streakEl.innerHTML = '<span>✓ ' + quiz.streak + ' in a row</span>';
-  } else {
-    streakEl.innerHTML = '';
-  }
+  if (quiz.streak >= 3) streakEl.innerHTML = '<span class="hot">\u{1F525} ' + quiz.streak + ' streak!</span>';
+  else if (quiz.streak > 0) streakEl.innerHTML = '<span>\u2713 ' + quiz.streak + ' in a row</span>';
+  else streakEl.innerHTML = '';
 
   document.getElementById('questionType').textContent = q.type;
   document.getElementById('questionText').textContent = q.q;
@@ -1153,7 +944,6 @@ function renderQuestion() {
     btn.onclick = () => selectAnswer(i);
     optArea.appendChild(btn);
   });
-
   document.getElementById('feedback').className = 'feedback';
   document.getElementById('feedback').innerHTML = '';
   document.getElementById('nextBtn').className = 'next-btn';
@@ -1164,68 +954,47 @@ function selectAnswer(index) {
   const q = quiz.questions[quiz.currentIndex];
   const correct = index === q.answer;
 
-  // Disable all buttons
-  const btns = document.querySelectorAll('.option-btn');
-  btns.forEach((btn, i) => {
+  document.querySelectorAll('.option-btn').forEach((btn, i) => {
     btn.disabled = true;
     if (i === q.answer) btn.classList.add('correct');
     if (i === index && !correct) btn.classList.add('wrong');
   });
 
-  // Update score
   if (correct) {
-    quiz.score++;
-    quiz.streak++;
+    quiz.score++; quiz.streak++;
     if (quiz.streak > quiz.maxStreak) quiz.maxStreak = quiz.streak;
-
     let pts = 10;
     if (quiz.streak >= 5) pts = 25;
     else if (quiz.streak >= 3) pts = 15;
     quiz.points += pts;
-
     showPointsPopup('+' + pts);
-  } else {
-    quiz.streak = 0;
-  }
+  } else { quiz.streak = 0; }
 
-  // Streak update
   const streakEl = document.getElementById('streakDisplay');
-  if (quiz.streak >= 3) {
-    streakEl.innerHTML = '<span class="hot">🔥 ' + quiz.streak + ' streak!</span>';
-  } else if (quiz.streak > 0) {
-    streakEl.innerHTML = '<span>✓ ' + quiz.streak + ' in a row</span>';
-  } else {
-    streakEl.innerHTML = '';
-  }
+  if (quiz.streak >= 3) streakEl.innerHTML = '<span class="hot">\u{1F525} ' + quiz.streak + ' streak!</span>';
+  else if (quiz.streak > 0) streakEl.innerHTML = '<span>\u2713 ' + quiz.streak + ' in a row</span>';
+  else streakEl.innerHTML = '';
 
-  // Feedback
   const fb = document.getElementById('feedback');
   fb.className = 'feedback show ' + (correct ? 'correct-fb' : 'wrong-fb');
-  fb.innerHTML = (correct ? '✅ ' : '❌ ') + q.explanation;
-
+  fb.innerHTML = (correct ? '\u2705 ' : '\u274C ') + q.explanation;
   document.getElementById('nextBtn').className = 'next-btn show';
 }
 
 function nextQuestion() {
-  const quiz = currentQuiz;
-  quiz.currentIndex++;
-  if (quiz.currentIndex >= quiz.questions.length) {
-    showResults();
-  } else {
-    renderQuestion();
-  }
+  currentQuiz.currentIndex++;
+  if (currentQuiz.currentIndex >= currentQuiz.questions.length) showResults();
+  else renderQuestion();
 }
 
 function showResults() {
   document.getElementById('quizScreen').classList.remove('active');
-
   const quiz = currentQuiz;
   const total = quiz.questions.length;
   const pct = Math.round((quiz.score / total) * 100);
   const passed = pct >= 70;
   const perfect = pct === 100;
 
-  // Update global state
   state.totalPoints += quiz.points;
   if (quiz.maxStreak > state.bestStreak) state.bestStreak = quiz.maxStreak;
 
@@ -1237,16 +1006,12 @@ function showResults() {
     }
     if (!prev) badgeUnlocked = true;
   }
-  if (quiz.isChallenge && quiz.score > state.challengeHighScore) {
-    state.challengeHighScore = quiz.score;
-  }
+  if (quiz.isChallenge && quiz.score > state.challengeHighScore) state.challengeHighScore = quiz.score;
   saveState();
 
-  // Build results HTML
-  let icon = perfect ? '🏆' : passed ? '🎉' : '💪';
+  let icon = perfect ? '\u{1F3C6}' : passed ? '\u{1F389}' : '\u{1F4AA}';
   let title = perfect ? 'PERFECT SCORE!' : passed ? 'Badge Earned!' : 'Not Quite...';
-  let subtitle = perfect ? 'Absolute legend.' : passed ? 'Nice work — you know your stuff!' : 'You need 70% to earn this badge. Give it another crack!';
-
+  let subtitle = perfect ? 'Absolute legend.' : passed ? 'Nice work \u2014 you know your stuff!' : 'You need 70% to earn this badge. Give it another crack!';
   if (quiz.isChallenge) {
     title = pct >= 80 ? 'Crushing It!' : pct >= 50 ? 'Solid Effort!' : 'Keep Practising!';
     subtitle = quiz.score + '/' + total + ' correct. Challenge high score: ' + state.challengeHighScore + '/10';
@@ -1256,20 +1021,15 @@ function showResults() {
   html += '<div class="results-title">' + title + '</div>';
   html += '<div class="results-subtitle">' + subtitle + '</div>';
   html += '<div class="results-score">' + quiz.score + '/' + total + '</div>';
-  html += '<div class="results-detail">' + quiz.points + ' points earned · Best streak: ' + quiz.maxStreak + '</div>';
-
+  html += '<div class="results-detail">' + quiz.points + ' points earned \u00B7 Best streak: ' + quiz.maxStreak + '</div>';
   if (badgeUnlocked) {
     html += '<div class="badge-unlocked"><div class="badge-icon">' + quiz.badgeIcon + '</div><h3>' + quiz.badgeName + ' Unlocked!</h3></div>';
   }
-
   html += '<div class="result-btns">';
-  if (!quiz.isChallenge) {
-    html += '<button class="btn-retry" onclick="startBadgeQuiz(\'' + quiz.badgeId + '\')">Retry</button>';
-  } else {
-    html += '<button class="btn-retry" onclick="startChallenge()">Again</button>';
-  }
-  html += '<button class="btn-home" onclick="goHome()">Home</button>';
-  html += '</div>';
+  html += quiz.isChallenge
+    ? '<button class="btn-retry" onclick="startChallenge()">Again</button>'
+    : '<button class="btn-retry" onclick="startBadgeQuiz(\'' + quiz.badgeId + '\')">Retry</button>';
+  html += '<button class="btn-home" onclick="goHome()">Home</button></div>';
 
   const screen = document.getElementById('resultsScreen');
   screen.innerHTML = html;
@@ -1284,16 +1044,14 @@ function goHome() {
 }
 
 // ============================================================
-// HOME SCREEN RENDERING
+// HOME RENDERING
 // ============================================================
 function renderHome() {
-  // Stats
   document.getElementById('totalPoints').textContent = state.totalPoints;
   const earnedCount = Object.keys(state.badges).length;
   document.getElementById('badgesEarned').textContent = earnedCount + '/' + BADGES.length;
   document.getElementById('bestStreak').textContent = state.bestStreak;
 
-  // Rank
   let rank = RANKS[0];
   for (let i = RANKS.length - 1; i >= 0; i--) {
     if (earnedCount >= RANKS[i].minBadges) { rank = RANKS[i]; break; }
@@ -1301,7 +1059,6 @@ function renderHome() {
   document.getElementById('rankTitle').textContent = rank.title;
   document.getElementById('rankFill').style.width = ((earnedCount / BADGES.length) * 100) + '%';
 
-  // Badge grid
   const grid = document.getElementById('badgeGrid');
   grid.innerHTML = '';
   BADGES.forEach(badge => {
@@ -1309,13 +1066,8 @@ function renderHome() {
     const card = document.createElement('div');
     card.className = 'badge-card' + (earned ? ' earned' : '');
     card.onclick = () => startBadgeQuiz(badge.id);
-
     let scoreText = 'Tap to start';
-    if (earned) {
-      const b = state.badges[badge.id];
-      scoreText = 'Best: ' + b.bestScore + '/' + b.total;
-    }
-
+    if (earned) scoreText = 'Best: ' + state.badges[badge.id].bestScore + '/' + state.badges[badge.id].total;
     card.innerHTML = '<div class="badge-icon">' + badge.icon + '</div><div class="badge-name">' + badge.name + '</div><div class="badge-score">' + scoreText + '</div>';
     grid.appendChild(card);
   });
@@ -1340,8 +1092,47 @@ function showPointsPopup(text) {
   setTimeout(() => el.remove(), 900);
 }
 
-// Init
-renderHome();
+document.getElementById('loginImpos').addEventListener('keydown', function(e) { if (e.key === 'Enter') attemptLogin(); });
+document.getElementById('loginName').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('loginImpos').focus(); });
+
+// ============================================================
+// ONE-TIME STAFF SEED (runs once on first deploy, then never again)
+// ============================================================
+function seedInitialStaff() {
+  db.ref('staff').once('value').then(snap => {
+    if (snap.exists()) return; // Already seeded
+    console.log('First run detected — seeding staff list...');
+    const staff = {
+      "95": { name: "Kye", impos: "95", admin: false },
+      "69": { name: "Ruby", impos: "69", admin: false },
+      "88": { name: "Sam", impos: "88", admin: true },
+      "10": { name: "Tommy", impos: "10", admin: false },
+      "98": { name: "Oliver", impos: "98", admin: false },
+      "44": { name: "Hamish", impos: "44", admin: false },
+      "42": { name: "Brayden", impos: "42", admin: false },
+      "02": { name: "Riley", impos: "02", admin: true },
+      "11": { name: "Will", impos: "11", admin: false },
+      "67": { name: "Jamie", impos: "67", admin: false },
+      "12": { name: "Adam", impos: "12", admin: true },
+      "86": { name: "Rowan", impos: "86", admin: false },
+      "87": { name: "Issy", impos: "87", admin: false },
+      "89": { name: "Fennah", impos: "89", admin: false },
+      "90": { name: "Teoni", impos: "90", admin: false },
+      "93": { name: "Liam", impos: "93", admin: false },
+      "01": { name: "Tom", impos: "01", admin: true },
+      "99": { name: "Jono", impos: "99", admin: true }
+    };
+    db.ref('staff').set(staff).then(() => {
+      console.log('Staff list seeded successfully!');
+    }).catch(err => console.error('Seed error:', err));
+  });
+}
+
+// ============================================================
+// INIT
+// ============================================================
+seedInitialStaff();
+tryAutoLogin();
 </script>
 </body>
 </html>
