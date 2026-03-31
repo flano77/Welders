@@ -294,7 +294,19 @@
     text-transform: uppercase; letter-spacing: 1px;
   }
   .export-btn:active { transform: scale(0.97); background: rgba(232,168,56,0.1); }
-
+  /* ===== EDIT STAFF INLINE ===== */
+  .edit-staff-row {
+    background: var(--card); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+  }
+  .edit-staff-fields { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .edit-staff-fields input {
+    flex: 1; min-width: 80px; padding: 8px 10px;
+    background: var(--bg); border: 2px solid var(--accent); border-radius: 8px;
+    color: var(--text); font-size: 0.9em; outline: none;
+  }
+  .edit-staff-fields label { display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 0.85em; padding: 0 8px; }
+  .edit-staff-btns { display: flex; gap: 6px; }
+  
   /* ===== POINTS POPUP ===== */
   .points-popup {
     position: fixed; top: 50%; left: 50%;
@@ -700,6 +712,7 @@ function logout() {
   document.getElementById('loginError').textContent = '';
   document.getElementById('loginBtn').disabled = false;
   document.getElementById('loginBtn').textContent = 'Log In';
+  document.getElementById('tabAdmin').style.display = 'none';
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('resultsScreen').classList.remove('active');
   document.getElementById('homeScreen').classList.add('active');
@@ -794,15 +807,14 @@ function renderAdminStaffList() {
   let html = '';
   keys.forEach(impos => {
     const s = allStaff[impos];
+    html += '<div id="staff-row-' + impos + '">';
     html += '<div class="admin-staff-row"><div class="admin-staff-info">';
     html += '<div class="admin-staff-name">' + s.name + (s.admin ? ' <span style="color:var(--accent);font-size:0.75em;">ADMIN</span>' : '') + '</div>';
     html += '<div class="admin-staff-meta">IMPOS: ' + impos + '</div></div>';
     html += '<div class="admin-staff-actions">';
-    html += s.admin
-      ? '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',false)">Remove Admin</button>'
-      : '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',true)">Make Admin</button>';
+    html += '<button class="admin-btn-sm primary" onclick="editStaff(\'' + impos + '\')">Edit</button>';
     html += '<button class="admin-btn-sm danger" onclick="removeStaff(\'' + impos + '\')">Remove</button>';
-    html += '</div></div>';
+    html += '</div></div></div>';
   });
   listEl.innerHTML = html;
 }
@@ -861,8 +873,67 @@ function removeStaff(impos) {
   db.ref().update(updates).then(() => loadAdminData());
 }
 
-function toggleAdmin(impos, makeAdmin) {
-  db.ref('staff/' + impos + '/admin').set(makeAdmin).then(() => loadAdminData());
+function editStaff(impos) {
+  const s = allStaff[impos];
+  if (!s) return;
+  const rowEl = document.getElementById('staff-row-' + impos);
+  rowEl.innerHTML = '<div class="edit-staff-row">'
+    + '<div class="edit-staff-fields">'
+    + '<input id="edit-name-' + impos + '" type="text" value="' + s.name + '" placeholder="Name">'
+    + '<input id="edit-impos-' + impos + '" type="text" inputmode="numeric" value="' + impos + '" placeholder="IMPOS #" maxlength="4">'
+    + '<label><input type="checkbox" id="edit-admin-' + impos + '"' + (s.admin ? ' checked' : '') + '> Admin</label>'
+    + '</div>'
+    + '<div class="edit-staff-btns">'
+    + '<button class="admin-btn-sm primary" onclick="saveStaffEdit(\'' + impos + '\')">Save</button>'
+    + '<button class="admin-btn-sm secondary" onclick="renderAdminStaffList()">Cancel</button>'
+    + '</div></div>';
+}
+
+function saveStaffEdit(oldImpos) {
+  const newName = document.getElementById('edit-name-' + oldImpos).value.trim();
+  const newImpos = document.getElementById('edit-impos-' + oldImpos).value.trim().padStart(2, '0');
+  const newAdmin = document.getElementById('edit-admin-' + oldImpos).checked;
+
+  if (!newName || !newImpos || newImpos === '00') { alert('Please enter a valid name and IMPOS number.'); return; }
+
+  // Check if new IMPOS is already taken by someone else
+  if (newImpos !== oldImpos && allStaff[newImpos]) {
+    alert('IMPOS ' + newImpos + ' is already assigned to ' + allStaff[newImpos].name + '.');
+    return;
+  }
+
+  if (newImpos === oldImpos) {
+    // Simple update — just change name/admin, and update name in progress too
+    db.ref('staff/' + oldImpos).set({ name: newName, impos: newImpos, admin: newAdmin }).then(() => {
+      // Also update name in progress record if it exists
+      db.ref('progress/' + oldImpos + '/name').set(newName).then(() => loadAdminData());
+    });
+  } else {
+    // IMPOS changed — need to migrate staff record AND progress to new key
+    var oldProgress = null;
+    db.ref('progress/' + oldImpos).once('value').then(snap => {
+      oldProgress = snap.val();
+      // Write new staff record
+      return db.ref('staff/' + newImpos).set({ name: newName, impos: newImpos, admin: newAdmin });
+    }).then(() => {
+      // Move progress to new key (if any existed)
+      if (oldProgress) {
+        oldProgress.name = newName;
+        return db.ref('progress/' + newImpos).set(oldProgress);
+      }
+    }).then(() => {
+      // Delete old records
+      var deletes = {};
+      deletes['staff/' + oldImpos] = null;
+      deletes['progress/' + oldImpos] = null;
+      return db.ref().update(deletes);
+    }).then(() => {
+      loadAdminData();
+    }).catch(err => {
+      console.error('Edit error:', err);
+      alert('Something went wrong. Try again.');
+    });
+  }
 }
 
 function exportCSV() {
