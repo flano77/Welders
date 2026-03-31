@@ -712,6 +712,7 @@ function logout() {
   document.getElementById('loginError').textContent = '';
   document.getElementById('loginBtn').disabled = false;
   document.getElementById('loginBtn').textContent = 'Log In';
+  document.getElementById('tabAdmin').style.display = 'none';
   document.getElementById('quizScreen').classList.remove('active');
   document.getElementById('resultsScreen').classList.remove('active');
   document.getElementById('homeScreen').classList.add('active');
