@@ -935,10 +935,6 @@ function saveStaffEdit(oldImpos) {
   }
 }
 
-function toggleAdmin(impos, makeAdmin) {
-  db.ref('staff/' + impos + '/admin').set(makeAdmin).then(() => loadAdminData());
-}
-
 function exportCSV() {
   const rows = [['Name', 'IMPOS', 'Points', 'Badges Earned', 'Badges List', 'Best Streak', 'Last Active']];
   Object.keys(allStaff).forEach(impos => {
