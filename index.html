@@ -1166,43 +1166,10 @@ function showPointsPopup(text) {
 document.getElementById('loginImpos').addEventListener('keydown', function(e) { if (e.key === 'Enter') attemptLogin(); });
 document.getElementById('loginName').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('loginImpos').focus(); });
 
-// ============================================================
-// ONE-TIME STAFF SEED (runs once on first deploy, then never again)
-// ============================================================
-function seedInitialStaff() {
-  db.ref('staff').once('value').then(snap => {
-    if (snap.exists()) return; // Already seeded
-    console.log('First run detected — seeding staff list...');
-    const staff = {
-      "95": { name: "Kye", impos: "95", admin: false },
-      "69": { name: "Ruby", impos: "69", admin: false },
-      "88": { name: "Sam", impos: "88", admin: true },
-      "10": { name: "Tommy", impos: "10", admin: false },
-      "98": { name: "Oliver", impos: "98", admin: false },
-      "44": { name: "Hamish", impos: "44", admin: false },
-      "42": { name: "Brayden", impos: "42", admin: false },
-      "02": { name: "Riley", impos: "02", admin: true },
-      "11": { name: "Will", impos: "11", admin: false },
-      "67": { name: "Jamie", impos: "67", admin: false },
-      "12": { name: "Adam", impos: "12", admin: true },
-      "86": { name: "Rowan", impos: "86", admin: false },
-      "87": { name: "Issy", impos: "87", admin: false },
-      "89": { name: "Fennah", impos: "89", admin: false },
-      "90": { name: "Teoni", impos: "90", admin: false },
-      "93": { name: "Liam", impos: "93", admin: false },
-      "01": { name: "Tom", impos: "01", admin: true },
-      "99": { name: "Jono", impos: "99", admin: true }
-    };
-    db.ref('staff').set(staff).then(() => {
-      console.log('Staff list seeded successfully!');
-    }).catch(err => console.error('Seed error:', err));
-  });
-}
 
 // ============================================================
 // INIT
 // ============================================================
-seedInitialStaff();
 tryAutoLogin();
 </script>
 </body>
