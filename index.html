@@ -812,9 +812,6 @@ function renderAdminStaffList() {
     html += '<div class="admin-staff-meta">IMPOS: ' + impos + '</div></div>';
     html += '<div class="admin-staff-actions">';
     html += '<button class="admin-btn-sm primary" onclick="editStaff(\'' + impos + '\')">Edit</button>';
-    html += s.admin
-      ? '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',false)">Remove Admin</button>'
-      : '<button class="admin-btn-sm secondary" onclick="toggleAdmin(\'' + impos + '\',true)">Make Admin</button>';
     html += '<button class="admin-btn-sm danger" onclick="removeStaff(\'' + impos + '\')">Remove</button>';
     html += '</div></div></div>';
   });
